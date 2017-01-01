@@ -20,3 +20,4 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/$', BookReaderSignUp.as_view(template_name="bookreadersignup.html")),
 ]
+
