@@ -1,0 +1,50 @@
+Hi
+
+This is readMe file that will explain about our project.
+
+this is the structure which shows the format of project ::
+
+our_project/
+    manage.py
+    my_project/
+        __init__.py
+        settings.py
+        urls.py
+        wsgi.py
+    app1/
+        __init__.py
+        admin.py
+        migrations/
+            __init__.py
+        models.py
+        tests.py
+        views.py
+    app2/
+        __init__.py
+        admin.py
+        migrations/
+            __init__.py
+        models.py
+        tests.py
+        views.py
+    so on :)
+
+for creating your app folder use command bellow where manage.py is ...
+>python manage.py startapp <your app name>
+then you can work on your app without concerning about confliction that may occur later ;)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+We Are [̲̅z̲̅][̲̅e̲̅][̲̅l̲̅][̲̅i̲̅][̲̅g̲̅]
