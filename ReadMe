@@ -6,7 +6,7 @@ this is the structure which shows the format of project ::
 
 our_project/
     manage.py
-    my_project/
+    our_project/
         __init__.py
         settings.py
         urls.py
