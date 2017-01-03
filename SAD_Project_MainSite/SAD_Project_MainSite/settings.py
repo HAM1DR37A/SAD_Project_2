@@ -4,6 +4,11 @@ from __future__ import absolute_import, unicode_literals
 # becomes `proj.celery.schedules` in Python 2.x since it allows
 # for relative imports by default.
 
+import os
+
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -13,19 +18,16 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'ScheduledThingsApp',
-    'django_celery_beat',
+    'showSomeResult.apps.ShowsomeresultConfig'
+    # 'ScheduledThingsApp',
+    # 'django_celery_beat',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
-
-
-# Django settings for proj project.
-
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+ALLOWED_HOSTS = []
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -37,7 +39,7 @@ DATABASES = {
     'default': {
         # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'test.db',  # path to database file if using sqlite3.
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),  # path to database file if using sqlite3.
         'USER': '',        # Not used with sqlite3.
         'PASSWORD': '',    # Not used with sqlite3.
         'HOST': '',        # Set to empty string for localhost.
@@ -46,6 +48,41 @@ DATABASES = {
                            # Not used with sqlite3.
     }
 }
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        ,
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'debug': DEBUG,
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
+
 
 # Local time zone for this installation. Choices can be found here:
 # https://en.wikipedia.org/wiki/List_of_tz_zones_by_name
