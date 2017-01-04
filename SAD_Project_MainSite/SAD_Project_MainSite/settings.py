@@ -21,8 +21,6 @@ INSTALLED_APPS = (
     'showSomeResult.apps.ShowsomeresultConfig'
     # 'ScheduledThingsApp',
     # 'django_celery_beat',
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -52,7 +50,7 @@ DATABASES = {
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        'DIRS': [os.path.join(BASE_DIR, 'SAD_Project_MainSite/templates')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
