@@ -18,7 +18,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'showSomeResult.apps.ShowsomeresultConfig'
+    'showSomeResult.apps.ShowsomeresultConfig',
     # 'ScheduledThingsApp',
     # 'django_celery_beat',
     # Uncomment the next line to enable admin documentation:

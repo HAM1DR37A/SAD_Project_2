@@ -50,3 +50,7 @@ def getNewTarjomeReq(request, book_id):
         x.save()
     output = '<br> '.join(["user:"+q.name+"||notif:"+q.notification for q in motarjems])
     return HttpResponse(output)
+
+
+def bootiTest(request):
+    return render(request, 'showSomeResult/index.html')

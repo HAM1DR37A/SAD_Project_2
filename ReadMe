@@ -29,17 +29,6 @@ our_project/
         views.py
     so on :)
 
-for creating your app folder use command bellow where manage.py is ...
->python manage.py startapp <your app name>
-then you can work on your app without concerning about confliction that may occur later ;)
-
-for building other's DB use command bellow:
->python manage.py makemigrations <app name>
->python manage.py migrate
-
-
-
-
 
 
 

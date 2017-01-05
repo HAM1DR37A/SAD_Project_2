@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^takhfif/(?P<buyedItems>[0-9]+)/$', views.gettingNewBuyRequest, name='gettingNewBuyRequest'),
     # http://127.0.0.1:8000/searchSTH/update/2/
     url(r'^update/(?P<book_id>[0-9]+)/$', views.getNewTarjomeReq, name='getNewTarjomeReq'),
+    url(r'^bootiTest/$', views.bootiTest, name='bootiTest'),  # http://127.0.0.1:8000/searchSTH/bootiTest/
 ]
