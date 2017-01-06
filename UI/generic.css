@@ -1,3 +1,15 @@
+body{
+    direction: rtl;
+}
+
+.topspacer{
+    margin-top: 70px;
+}
+
+.spacer{
+    margin-top: 20px;
+}
+
 .ui.footer.segment {
     margin-top: 50px;
 }
