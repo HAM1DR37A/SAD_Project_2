@@ -63,6 +63,158 @@
 
         <div class="ui grid">
             
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="Semantic/semantic.css">
+    <link rel="stylesheet" type="text/css" href="generic.css">
+
+    <script src="js/jquery-3.1.1.js"></script>
+    <script src="Semantic/semantic.min.js"></script>
+    <script src="myscripts.js"></script>
+</head>
+<body>
+
+<div id="hiddenbar" class="ui large top fixed menu transition hidden">
+    <div class="ui container">
+        <a href="index.html" class="item">صفحه اصلی</a>
+        <a href="genres.html" class="item">کتاب ها</a>
+        <a class="item">تماس با ما</a>
+        <div class="left menu">
+            <div class="item">
+                <div class="ui icon input">
+                    <input type="text" placeholder="جست و جو">
+                    <i id="searchButton" class="search link icon"></i>
+                </div>
+            </div>
+            <a class="ui item">حساب کاربری
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="pusher">
+
+    <div id="jumbotron" class="ui inverted vertical masthead center aligned segment">
+
+        <div class="ui container">
+            <div class="ui large secondary inverted pointing menu">
+                <a href="index.html" class="item">صفحه اصلی</a>
+                <a href="genres.html" class="item">کتاب ها</a>
+                <a class="item">تماس با ما</a>
+                <div class="left menu">
+                    <div class="item">
+                        <div class="ui icon input">
+                            <input type="text" placeholder="جست و جو">
+                            <i class="search link icon"></i>
+                        </div>
+                    </div>
+                    <a class="ui item">حساب کاربری
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui text container" style="margin-bottom: 50px; padding-top: 50px">
+            <h1 class="ui inverted header">سیمگان</h1>
+            <h2>سامانه خدمت رسانی به کتاب یاران</h2>
+        </div>
+    </div>
+
+
+    <div class="ui container spacer">
+
+        <div class="ui grid">
+
+            <div class="four wide column center aligned">
+
+
+                <div class="row">
+                    <div class="ui small image">
+                        <img src="images/33.jpg">
+                    </div>
+                </div>
+
+                <div class="row spacer" style="direction: ltr">
+                    <div class="ui labeled button" style="width: 80%" tabindex="0">
+                        <div class="ui yellow button">
+                            <i class="star icon"></i>
+                        </div>
+                        <div class="ui basic yellow left label">افزودن به علافمه مندی ها</div>
+                    </div>
+                </div>
+
+                <div class="row spacer">
+                    <div class="ui secondary button" style="width: 80%" tabindex="0">ترجمه کتاب
+                    </div>
+                </div>
+
+                <div class="row spacer">
+                    <div class="ui star rating" id="ratestar"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="ui inverted vertical footer segment">
+        <div class="ui center aligned container">
+            <div class="ui stackable inverted grid">
+                <div class="seven wide column">
+                    <h4 class="ui inverted header">سیمگان</h4>
+                    <p>سامانه خدمت رسانی کتاب یاران</p>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header">اطلاعات</h4>
+                    <div class="ui inverted link list">
+                        <p class="item">پوریا دانشور</p>
+                        <p class="item">۹۲۱۰۵۸۵۴</p>
+                        <p class="item">دانشگاه شریف</p>
+                        <p class="item">مهندسی کامپیوتر</p>
+                    </div>
+                </div>
+            </div>
+            <div class="ui inverted section divider"></div>
+            <div class="ui horizontal inverted small link list">
+                <a class="item" href="#">Site Map</a>
+                <a class="item" href="#">Contact Us</a>
+                <a class="item" href="#">Terms and Conditions</a>
+                <a class="item" href="#">Privacy Policy</a>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+
+        $('#jumbotron')
+            .visibility({
+                once: false,
+                onBottomPassed: function() {
+                    document.getElementById("hiddenbar").className =
+                        document.getElementById("hiddenbar").className.replace
+                        ( /(?:^|\s)hidden(?!\S)/g , ' visible' )
+                },
+                onBottomPassedReverse: function () {
+                    console.log(2);
+                    document.getElementById("hiddenbar").className =
+                        document.getElementById("hiddenbar").className.replace
+                        ( /(?:^|\s)visible(?!\S)/g , ' hidden' )
+                }
+            })
+        ;
+    </script>
+
+</div>
+
+</body>
+</html>
+            
         </div>
 
     </div>
