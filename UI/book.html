@@ -382,6 +382,21 @@
 
 
     <script>
+    
+        $('.fixedrate')
+            .rating({
+                initialRating: 3,
+                interactive: false,
+                maxRating: 5
+            })
+        ;
+
+        $('#ratestar')
+            .rating({
+                initialRating: 3,
+                maxRating: 5
+            })
+        ;
 
         $('#jumbotron')
             .visibility({
