@@ -187,6 +187,26 @@
         </div>
     </div>
     
+    <script>
+
+        $('#jumbotron')
+            .visibility({
+                once: false,
+                onBottomPassed: function() {
+                    document.getElementById("hiddenbar").className =
+                        document.getElementById("hiddenbar").className.replace
+                        ( /(?:^|\s)hidden(?!\S)/g , ' visible' )
+                },
+                onBottomPassedReverse: function () {
+                    console.log(2);
+                    document.getElementById("hiddenbar").className =
+                        document.getElementById("hiddenbar").className.replace
+                        ( /(?:^|\s)visible(?!\S)/g , ' hidden' )
+                }
+            })
+        ;
+    </script>
+    
 </div>
 
 
