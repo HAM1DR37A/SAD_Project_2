@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" type="text/css" href="buttons.css"/>
+    <link rel="stylesheet" type="text/css" href="animate.css"/>
+
+</head>
+<body>
+    salam bar shoma ;)
+
+
+
+
+    <script src="jquery-1.7.2.min.js"></script>
+
+    <!-- noty -->
+    <script type="text/javascript" src="noty/packaged/jquery.noty.packaged.js"></script>
+
+    <script type="text/javascript">
+
+        function generate(type, text) {
+
+            var n = noty({
+                text        : text,
+                type        : type,
+                dismissQueue: true,
+                progressBar : true,
+                timeout     : 5000,
+                layout      : 'bottomRight',
+                closeWith   : ['click'],
+                theme       : 'relax',
+                maxVisible  : 10,
+                animation   : {
+                    open  : 'animated bounceInLeft',
+                    close : 'animated bounceOutLeft',
+                    easing: 'swing',
+                    speed : 500
+                }
+            });
+            return n;
+        }
+
+
+        $(document).ready(function () {
+
+            generate('alarm', 'salam :)');
+
+            setTimeout(function () {
+                generate('warning', 'salam :)');
+                generate('error', 'say');
+                generate('information', 'bye');
+                generate('success', 'hi');
+            }, 500);
+
+        });
+
+    </script>
+</body>
+</html>
