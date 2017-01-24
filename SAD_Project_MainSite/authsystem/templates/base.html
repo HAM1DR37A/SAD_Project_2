@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sholegram</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body>
+<div class="navbar navbar-default">
+    <div class="navbar-header" style="float: right;">
+
+        {% if user.is_authenticated %}
+{#            <a class="navbar-brand" href="/management/{{ user.id }}">Managment</a>#}
+            <a class="navbar-brand" href="/profile">Managment</a>
+        {% endif %}
+        <a class="navbar-brand" href="/main">Sholegram</a>
+    </div>
+
+     <div class="navbar-header" style="float: left;">
+
+        {% if user.is_authenticated %}
+            <a class="navbar-brand" href="/auth/logout">Logout ({{ user }})</a>
+        {% endif %}
+     </div>
+
+
+</div>
+<div class="container">
+    {% block body %}
+
+    {% endblock %}
+</div>
+</body>
+</html>
+
