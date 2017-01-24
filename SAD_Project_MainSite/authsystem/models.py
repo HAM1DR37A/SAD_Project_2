@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 from django.db.models.fields.related import ForeignKey
 
 
@@ -40,7 +41,7 @@ class Book(models.Model):
     author_name = models.CharField(null=False, max_length=20, default='author')
     translator_name = models.CharField(null=True, max_length=20)
     publisher_name = models.CharField(null=True, max_length=20)
-
+    adding_date = models.DateTimeField(default=timezone.now())
 
 class Genre(models.Model):
     genre_type = models.CharField(max_length=20,null=False)
@@ -83,6 +84,8 @@ class BookMaker(models.Model):
         (author, "Author"),
         (both, "Both")
     )
+    name = models.CharField(max_length=20, null=False)
+    last_name = models.CharField(max_length=20, null=False)
     book_maker_id = models.CharField(max_length=10, auto_created=True, primary_key=True)
     birth_date = models.DateField()
     gender = models.CharField(max_length=2, choices=gender_choices)
