@@ -9,8 +9,8 @@ from .models import TopGenre, BookForTarjome, motarjem
 
 def guide(request):
     return HttpResponse("use like this:<br>"
-                        "http://127.0.0.1:8000/searchSTH/topGenre/<br>"
-                        "OR<br>"
+                        "http://127.0.0.1:8000/searchSTH/topGenre/"
+                        "<br>OR<br>"
                         "http://127.0.0.1:8000/searchSTH/tarjomeList/")
 
 
