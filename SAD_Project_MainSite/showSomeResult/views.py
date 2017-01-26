@@ -53,4 +53,4 @@ def getNewTarjomeReq(request, book_id):
 
 
 def bootiTest(request):
-    return render(request, 'showSomeResult/index.html')
+    return render(request, 'showSomeResult/bootiTest.html')
