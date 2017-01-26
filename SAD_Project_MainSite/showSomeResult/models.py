@@ -56,9 +56,15 @@ class BookReaderUser(models.Model):
     # telephone_no = models.CharField(max_length=15)
     # address = models.CharField(max_length=150, null=False)
 
+    def __str__(self):
+        return self.django_user
+
 
 class Language(models.Model):
     language_name = models.CharField(max_length= 10)
+
+    def __str__(self):
+        return self.language_name
 
 
 class Book(models.Model):
@@ -74,12 +80,18 @@ class Book(models.Model):
     # publisher_name = models.CharField(null=True, max_length=20)
     # adding_date = models.DateTimeField(default=timezone.now())
 
+    def __str__(self):
+        return self.title
+
 class Genre(models.Model):
     genre_type = models.CharField(max_length=20,null=False)
     book_id = models.ForeignKey(Book, on_delete=models.CASCADE,null=False)
 
     class Meta:
         unique_together = ('genre_type', 'book_id')
+
+    def __str__(self):
+        return self.genre_type
 
 
 # TODO in chera name nadare?
@@ -117,13 +129,16 @@ class BookMaker(models.Model):
     # telephone_no = models.CharField(max_length=15)
     # address = models.CharField(max_length=150, null=False)
 
+    def __str__(self):
+        return self.name+" "+self.last_name
 
-class BookMakerLanguage(models.Model):
-    book_maker_id = models.ForeignKey(BookMaker, on_delete=models.CASCADE)
-    language_name = models.ForeignKey(Language, on_delete=models.CASCADE)
 
-    class Meta:
-        unique_together = ('book_maker_id', 'language_name')
+# class BookMakerLanguage(models.Model):
+#     book_maker_id = models.ForeignKey(BookMaker, on_delete=models.CASCADE)
+#     language_name = models.ForeignKey(Language, on_delete=models.CASCADE)
+#
+#     class Meta:
+#         unique_together = ('book_maker_id', 'language_name')
 
 '''
 class TranslationRequest(models.Model):
@@ -141,4 +156,7 @@ class Notification(models.Model):
     content = models.TextField()
     notif_date_created = models.DateField(null=False)
     BookMaker_id = models.ForeignKey(BookReaderUser)
+
+    def __str__(self):
+        return self.content
 
