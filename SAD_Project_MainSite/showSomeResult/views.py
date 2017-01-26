@@ -56,5 +56,15 @@ def bootiTest(request):
     return render(request, 'showSomeResult/bootiTest.html')
 
 
+
+from .forms import NameForm
 def search(request):
-    return render(request, 'showSomeResult/SearchingTarjomeList.html')
+    if request.method == 'POST':
+        form = NameForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['your_name']
+            return HttpResponse("tanks "+name)
+    else:
+        form = NameForm()
+
+    return render(request, 'showSomeResult/SearchingTarjomeList.html',{'form': form})

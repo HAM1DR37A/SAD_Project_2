@@ -6,9 +6,70 @@
     <meta charset="UTF-8">
     <title>Searching all List of Tarjome Requests</title>
 
+    <!-- bootsrap -->
     <link rel="stylesheet" href="{% static 'showSomeResult/bootstrap-3.3.7-dist/css/bootstrap.css' %}">
     <script src="{% static 'showSomeResult/jquery-3.1.1.min.js' %}"></script>
     <script src="{% static 'showSomeResult/bootstrap-3.3.7-dist/js/bootstrap.js' %}"></script>
+
+    <!-- semantic -->
+    <link rel="stylesheet" type="text/css" href="{% static 'showSomeResult/SemanticThings/semantic.css' %}">
+    <script src="{% static 'showSomeResult/SemanticThings/jquery.min.js' %}"></script>
+    <script src="{% static 'showSomeResult/SemanticThings/semantic.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+         /*   $('.ui.form')
+              .form({
+                    fields: {
+                      bookName: {
+                        identifier: 'bookName',
+                        rules: [
+                          {
+                            type   : 'empty',
+                            prompt : 'Please enter a password'
+                          },
+                          {
+                            type   : minLength[5],
+                            prompt : 'the minLength is 5'
+                          }
+                        ]
+                      },
+                      EsmeMotarjem: {
+                        identifier: 'EsmeMotarjem',
+                        rules: [
+                          {
+                            type   : 'empty',
+                            prompt : 'Please enter a motarjemName'
+                          }
+                        ]
+                      },
+                      terms: {
+                        identifier: 'terms',
+                        rules: [
+                          {
+                            type   : 'checked',
+                            prompt : 'You must agree to the terms and conditions'
+                          }
+                        ]
+                      }
+                    }
+                  })
+                ;
+                */
+             $('.ui.form')
+              .form({
+                fields: {
+                  bookName : ['minLength[2]', 'empty'],
+                  EsmeMotarjem   : ['minLength[2]', 'empty'],
+                  terms    : 'checked'
+                }
+              })
+            ;
+            $('.ui.checkbox')
+              .checkbox()
+            ;
+        });
+    </script>
+
     <style>
         /* Remove the navbar's default margin-bottom and rounded borders */
         .navbar {
@@ -69,7 +130,45 @@
   </div>
 </nav>
 
+<div class="container-fluid text-center">
+  <div class="row content">
 
+    <div class="col-sm-8 text-left">
+      <h1>Welcome</h1>
+
+            <form class="ui form">
+              <div class="field">
+                <label>Book Name</label>
+                <input type="text" name="bookName" placeholder="Book Name">
+              </div>
+              <div class="field">
+                <label>motarjem Name</label>
+                <input type="text" name="EsmeMotarjem" placeholder="Last Name">
+              </div>
+              <div class="field">
+                <div class="ui checkbox">
+                  <input type="checkbox" tabindex="0" class="hidden" name="terms">
+                  <label>I agree to the Terms and Conditions</label>
+                </div>
+              </div>
+              <button class="ui button" type="submit">Submit</button>
+            </form>
+
+    </div>
+
+    <br>
+    <div id="testFormInDjango">
+        <form action="" method="post">
+            {% csrf_token %}
+            <label for="your_name">Your name: </label>
+            <input id="your_name" type="text" name="your_name" value="{{ current_name }}">
+            <input type="submit" value="OK">
+        </form>
+    </div>
+  </div>
+
+
+</div>
 
 
 
