@@ -15,4 +15,5 @@ urlpatterns = [
 
     url(r'^bootiTest/$', views.bootiTest, name='bootiTest'),  # http://127.0.0.1:8000/searchSTH/bootiTest/
     url(r'^search/$', views.search, name='search'),  # http://127.0.0.1:8000/searchSTH/search/
+    url(r'^notif/$', views.notif, name='notif'),  # http://127.0.0.1:8000/searchSTH/notif/
 ]

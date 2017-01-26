@@ -69,3 +69,7 @@ def search(request):
         form = NameForm()
 
     return render(request, 'showSomeResult/SearchingTarjomeList.html',{'form': form})
+
+
+def notif(request):
+    return render(request, 'showSomeResult/NotifTemplate.html')
