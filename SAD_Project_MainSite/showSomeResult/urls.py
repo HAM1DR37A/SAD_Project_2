@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^update/(?P<book_id>[0-9]+)/$', views.getNewTarjomeReq, name='getNewTarjomeReq'),
 
     url(r'^bootiTest/$', views.bootiTest, name='bootiTest'),  # http://127.0.0.1:8000/searchSTH/bootiTest/
+    url(r'^search/$', views.search, name='search'),  # http://127.0.0.1:8000/searchSTH/search/
 ]

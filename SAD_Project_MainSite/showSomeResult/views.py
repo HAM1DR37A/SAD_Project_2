@@ -54,3 +54,7 @@ def getNewTarjomeReq(request, book_id):
 
 def bootiTest(request):
     return render(request, 'showSomeResult/bootiTest.html')
+
+
+def search(request):
+    return render(request, 'showSomeResult/SearchingTarjomeList.html')
