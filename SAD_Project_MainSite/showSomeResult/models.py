@@ -52,9 +52,9 @@ from django.db.models.fields.related import ForeignKey
 
 class BookReaderUser(models.Model):
     django_user = models.OneToOneField(User, null=False)
-    avatar = models.ImageField(null=False, default='user.png')
-    telephone_no = models.CharField(max_length=15)
-    address = models.CharField(max_length=150, null=False)
+    # avatar = models.ImageField(null=False, default='user.png')
+    # telephone_no = models.CharField(max_length=15)
+    # address = models.CharField(max_length=150, null=False)
 
 
 class Language(models.Model):
@@ -64,15 +64,15 @@ class Language(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=40, null=False)
     book_id = models.CharField(max_length=10, primary_key=True, auto_created=True)
-    first_publish_year = models.IntegerField(null=False)
-    isbn = models.CharField(max_length=20, null=False, unique=True)
-    number_of_pages = models.IntegerField()
-    summary = models.TextField()
-    cover_image_addr = models.ImageField(null=False, default='Book.png')
-    author_name = models.CharField(null=False, max_length=20, default='author')
-    translator_name = models.CharField(null=True, max_length=20)
-    publisher_name = models.CharField(null=True, max_length=20)
-    adding_date = models.DateTimeField(default=timezone.now())
+    # first_publish_year = models.IntegerField(null=False)
+    # isbn = models.CharField(max_length=20, null=False, unique=True)
+    # number_of_pages = models.IntegerField()
+    # summary = models.TextField()
+    # cover_image_addr = models.ImageField(null=False, default='Book.png')
+    # author_name = models.CharField(null=False, max_length=20, default='author')
+    # translator_name = models.CharField(null=True, max_length=20)
+    # publisher_name = models.CharField(null=True, max_length=20)
+    # adding_date = models.DateTimeField(default=timezone.now())
 
 class Genre(models.Model):
     genre_type = models.CharField(max_length=20,null=False)
@@ -82,11 +82,12 @@ class Genre(models.Model):
         unique_together = ('genre_type', 'book_id')
 
 
+# TODO in chera name nadare?
 class BookSeller(models.Model):
     book_seller_id = models.CharField(max_length=15, auto_created=True, primary_key=True)
-    avatar = models.ImageField(null=False, default='user.png')
-    telephone_no = models.CharField(max_length=15)
-    address = models.CharField(max_length=150, null=False)
+    # avatar = models.ImageField(null=False, default='user.png')
+    # telephone_no = models.CharField(max_length=15)
+    # address = models.CharField(max_length=150, null=False)
 
 
 #BookMaker
@@ -111,10 +112,10 @@ class BookMaker(models.Model):
     birth_date = models.DateField()
     gender = models.CharField(max_length=2, choices=gender_choices)
     book_maker_type = models.CharField(max_length=4, choices=type_choices)
-    verifier_id = models.ForeignKey(Admin)
-    avatar = models.ImageField(null=False, default='user.png')
-    telephone_no = models.CharField(max_length=15)
-    address = models.CharField(max_length=150, null=False)
+    # verifier_id = models.ForeignKey(Admin)
+    # avatar = models.ImageField(null=False, default='user.png')
+    # telephone_no = models.CharField(max_length=15)
+    # address = models.CharField(max_length=150, null=False)
 
 
 class BookMakerLanguage(models.Model):
@@ -124,7 +125,7 @@ class BookMakerLanguage(models.Model):
     class Meta:
         unique_together = ('book_maker_id', 'language_name')
 
-
+'''
 class TranslationRequest(models.Model):
     book_file = models.FileField()
     translation_request_id = models.IntegerField(primary_key=True, auto_created=True)
@@ -133,7 +134,7 @@ class TranslationRequest(models.Model):
     register_date = models.DateField()
     response_date = models.DateField()
     finish_date = models.DateField()
-
+'''
 
 class Notification(models.Model):
     notif_id = models.IntegerField(primary_key=True, auto_created=True)
