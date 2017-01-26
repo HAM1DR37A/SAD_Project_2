@@ -63,6 +63,7 @@ def search(request):
         form = NameForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['your_name']
+            # TODO in alan baiad ma ro erja bede be ie safheie dg ke oonja listi az ketab haro be karbar Nshoon bede
             return HttpResponse("tanks "+name)
     else:
         form = NameForm()
