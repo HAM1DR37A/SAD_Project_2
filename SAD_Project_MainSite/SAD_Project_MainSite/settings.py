@@ -19,6 +19,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'showSomeResult.apps.ShowsomeresultConfig',
+    'authsystem',
+    'SAD_Project_MainSite'
     # 'ScheduledThingsApp',
     # 'django_celery_beat',
     # Uncomment the next line to enable admin documentation:

@@ -43,9 +43,16 @@ class Book(models.Model):
     publisher_name = models.CharField(null=True, max_length=20)
     adding_date = models.DateTimeField(default=timezone.now())
 
+
+# this entity is the genre
 class Genre(models.Model):
-    genre_type = models.CharField(max_length=20,null=False)
-    book_id = models.ForeignKey(Book, on_delete=models.CASCADE,null=False)
+    genre_type = models.CharField(max_length=20,null=False, primary_key=True)
+
+
+# this entity represents relation between book and genre
+class GenreBook(models.Model):
+    genre_type = models.ForeignKey(Genre, on_delete= models.PROTECT)
+    book_id = models.ForeignKey(Book, on_delete=models.CASCADE, null=False)
 
     class Meta:
         unique_together = ('genre_type', 'book_id')
@@ -68,7 +75,7 @@ class SellBy(models.Model):
         unique_together = ('book_id', 'book_seller_id')
 
 
-#BookMaker
+# BookMaker
 class BookMaker(models.Model):
     male = 'ML'
     female = 'FM'
@@ -128,11 +135,11 @@ class Order(models.Model):
 
 class BookShoppingCart(models.Model):
     shopping_cart_id = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE)
-    book_id = models.ForeignKey(Book, on_delete=models.PROTECT)
+    book_id = models.ForeignKey(SellBy, on_delete=models.PROTECT)
 
 
 class PreOrder(models.Model):
-    #author can be retrieved by access to Write table
+    # author can be retrieved by access to Write table
     book_id = models.ForeignKey(Book, on_delete=models.PROTECT)
     user_name = models.ForeignKey(BookReaderUser, on_delete=models.PROTECT)
 
