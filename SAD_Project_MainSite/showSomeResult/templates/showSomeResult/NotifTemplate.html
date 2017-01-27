@@ -6,13 +6,73 @@
     <meta charset="UTF-8">
     <title>This is for notification</title>
 
+    <!-- for sending request -->
+    <script src="{% static 'showSomeResult/prototype.js' %}"></script>
+
     <!-- semantic -->
     <link rel="stylesheet" type="text/css" href="{% static 'showSomeResult/SemanticThings/semantic.css' %}">
-    <script src="{% static 'showSomeResult/SemanticThings/jquery.min.js' %}"></script>
     <script src="{% static 'showSomeResult/SemanticThings/semantic.js' %}"></script>
+    <script src="{% static 'showSomeResult/SemanticThings/jquery.min.js' %}"></script>
+
+
+
+
+   <!--doc get ready functions-->
+    <script type="text/javascript">
+
+        function httpReq(url) {
+            var answer;
+            $.ajax({
+                url: url,
+                type:"GET",
+                //using this dear Project for formatting date :)
+                //http://blog.stevenlevithan.com/archives/date-time-format
+                async: false,    //Cross-domain requests and dataType: "jsonp" requests do not support synchronous operation
+                cache: false,    //This will force requested pages not to be cached by the browser
+                processData:false, //To avoid making query String instead of JSON
+                success: function(data){
+                    answer=data;
+                },
+                error: function(){
+                    alert("Oh shit");
+                }
+            });
+            return answer;
+        }
+
+        $(document).ready(function () {
+
+
+
+            //Creating Function
+            function HeartBeat(){
+                // do whatever you like here
+                var url = "http://127.0.0.1:8000/searchSTH/showAllNotif/";
+                var userID=2;    /*TODO in baiad az karbar gerefte beshe*/
+
+                var notifs= httpReq(url+String(userID));
+                alert(notifs);
+                myData = jQuery.parseJSON( notifs );
+{#                alert(myData[0]["model"]);#}
+                alert(myData[0]["fields"]["content"]);
+
+
+                setTimeout(HeartBeat, 3000);	//Call this function 2sec later
+            }
+            //run that func for the first time ;)
+            HeartBeat();
+
+
+        });
+
+
+    </script>
+
+
 
 </head>
 <body>
+
 
 </body>
 </html>

@@ -56,7 +56,7 @@ def bootiTest(request):
     return render(request, 'showSomeResult/bootiTest.html')
 
 
-
+# THIS IS SEARCH PART
 from .forms import NameForm
 def search(request):
     if request.method == 'POST':
@@ -68,9 +68,11 @@ def search(request):
     else:
         form = NameForm()
 
-    return render(request, 'showSomeResult/SearchingTarjomeList.html',{'form': form})
+    return render(request, 'showSomeResult/SearchTarjomeListForm.html',{'form': form})
 
 
+
+# THIS IS NOTIF PART
 def notif(request):
     return render(request, 'showSomeResult/NotifTemplate.html')
 
