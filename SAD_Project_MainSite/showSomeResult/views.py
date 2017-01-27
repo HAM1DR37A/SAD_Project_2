@@ -73,3 +73,12 @@ def search(request):
 
 def notif(request):
     return render(request, 'showSomeResult/NotifTemplate.html')
+
+from .models import BookMaker, Notification
+from django.http import JsonResponse
+from django.core import serializers
+def responseToNotifJava(request, userID):
+    user = BookMaker.objects.get(book_maker_id=userID) #TODO in khat fln ke ezafii be nazar mirese, kolan model ha kheili irad darand :|
+    notifs = list(Notification.objects.filter(BookMaker_id=user.book_maker_id))
+    posts_serialized = serializers.serialize('json', notifs)
+    return JsonResponse(posts_serialized, safe=False)

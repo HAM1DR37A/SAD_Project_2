@@ -155,7 +155,8 @@ class Notification(models.Model):
     notif_id = models.IntegerField(primary_key=True, auto_created=True)
     content = models.TextField()
     notif_date_created = models.DateField(null=False)
-    BookMaker_id = models.ForeignKey(BookReaderUser)
+    # TODO in khat e paiini eslah shod
+    BookMaker_id = models.ForeignKey(BookMaker)
 
     def __str__(self):
         return self.content
