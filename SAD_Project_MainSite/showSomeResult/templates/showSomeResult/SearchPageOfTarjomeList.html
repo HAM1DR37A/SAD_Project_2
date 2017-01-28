@@ -133,39 +133,61 @@
 <div class="container-fluid text-center">
   <div class="row content">
 
-    <div class="col-sm-8 text-left">
-      <h1>Welcome</h1>
-
-            <form class="ui form">
-              <div class="field">
-                <label>Book Name</label>
-                <input type="text" name="bookName" placeholder="Book Name">
-              </div>
-              <div class="field">
-                <label>motarjem Name</label>
-                <input type="text" name="EsmeMotarjem" placeholder="Last Name">
-              </div>
-              <div class="field">
-                <div class="ui checkbox">
-                  <input type="checkbox" tabindex="0" class="hidden" name="terms">
-                  <label>I agree to the Terms and Conditions</label>
-                </div>
-              </div>
-              <button class="ui button" type="submit">Submit</button>
-            </form>
-
-    </div>
+{#    <div class="col-sm-8 text-left">#}
+{#      <h1>Welcome</h1>#}
+{##}
+{#            <form class="ui form">#}
+{#              <div class="field">#}
+{#                <label>Book Name</label>#}
+{#                <input type="text" name="bookName" placeholder="Book Name">#}
+{#              </div>#}
+{#              <div class="field">#}
+{#                <label>motarjem Name</label>#}
+{#                <input type="text" name="EsmeMotarjem" placeholder="Last Name">#}
+{#              </div>#}
+{#              <div class="field">#}
+{#                <div class="ui checkbox">#}
+{#                  <input type="checkbox" tabindex="0" class="hidden" name="terms">#}
+{#                  <label>I agree to the Terms and Conditions</label>#}
+{#                </div>#}
+{#              </div>#}
+{#              <button class="ui button" type="submit">Submit</button>#}
+{#            </form>#}
+{##}
+{#    </div>#}
 
     <br>
     <div id="testFormInDjango">
         <form action="" method="post">
             {% csrf_token %}
-            <label for="your_name">Your name: </label>
-            <input id="your_name" type="text" name="your_name" value="{{ current_name }}">
+{#            <label for="book_ID">Your book_ID: </label>#}
+{#            <input id="book_ID" type="text" name="book_ID" >    {{ form.book_ID.errors }}#}
+{#            <br>#}
+{#            <label for="book_name">Your book_name: </label>#}
+{#            <input id="book_name" type="text" name="book_name" >    {{ form.book_name.errors }}#}
+{#            <br>#}
+{#            <label for="lang">Your desired lang: </label>#}
+{#            <input id="lang" type="text" name="lang" >    {{ form.language.errors }}#}
+
+
+            {{ form.as_p }}
+
+
             <input type="submit" value="OK">
         </form>
     </div>
+
+    <br>
+    <div>
+          {% for book in bookList %}
+            <li>{{ book }}</li>
+          {% endfor %}
+        {{ bookList }}
+    </div>
+
   </div>
+
+
 
 
 </div>

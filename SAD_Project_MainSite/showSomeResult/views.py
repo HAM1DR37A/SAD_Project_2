@@ -58,17 +58,38 @@ def bootiTest(request):
 
 # THIS IS SEARCH PART
 from .forms import NameForm
+from .models import BookForTarjome
 def search(request):
     if request.method == 'POST':
         form = NameForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['your_name']
-            # TODO in alan baiad ma ro erja bede be ie safheie dg ke oonja listi az ketab haro be karbar Nshoon bede
-            return HttpResponse("tanks "+name)
+            id = form.cleaned_data["book_ID"]
+            name = form.cleaned_data["book_name"]
+            langs = form.cleaned_data.get('language')
+            # TODO alan baiad be list e tarjome ie search bezanim bar asas e id va name, baadesh nataiej ro be safhe befrestim ta neshoon bede
+            answer= list()
+            for x in langs:
+                if name != "":
+                    if id != "":
+                        # TODO id ro bas too search handle kone
+                        temp = BookForTarjome.objects.filter(lang=x, name=name)
+                    else:
+                        temp = BookForTarjome.objects.filter(lang=x, name=name)
+                else:
+                    if id != "":
+                        # TODO id ro bas too search handle kone
+                        temp = BookForTarjome.objects.filter(lang=x)
+                    else:
+                        temp = BookForTarjome.objects.filter(lang=x)
+
+                for i in range(len(temp)):
+                    answer.append(temp[i])
+
+            return render(request,'showSomeResult/SearchPageOfTarjomeList.html',{'bookList':answer})
     else:
         form = NameForm()
 
-    return render(request, 'showSomeResult/SearchTarjomeListForm.html',{'form': form})
+    return render(request, 'showSomeResult/SearchPageOfTarjomeList.html',{'form': form})
 
 
 
