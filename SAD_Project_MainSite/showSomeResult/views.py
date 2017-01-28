@@ -72,10 +72,11 @@ def search(request):
 
 
 
-# THIS IS NOTIF PART
+# THIS IS NOTIF TEST PAGE
 def notif(request):
     return render(request, 'showSomeResult/NotifTemplate.html')
 
+# THIS IS FOR RESPONSE TO NOTIF REQUESTS
 from .models import BookMaker, Notification
 from django.http import JsonResponse
 from django.core import serializers

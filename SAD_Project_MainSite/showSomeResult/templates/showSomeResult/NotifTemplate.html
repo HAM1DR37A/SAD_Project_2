@@ -8,14 +8,15 @@
 
     <!-- semantic -->
     <link rel="stylesheet" type="text/css" href="{% static 'showSomeResult/SemanticThings/semantic.css' %}">
-    <script src="{% static 'showSomeResult/SemanticThings/semantic.js' %}"></script>
     <script src="{% static 'showSomeResult/SemanticThings/jquery.min.js' %}"></script>
+    <script src="{% static 'showSomeResult/SemanticThings/semantic.js' %}"></script>
 
 
 
    <!--doc get ready functions-->
     <script type="text/javascript">
 
+        // baraie ersal e darkhast be ie url use mishe
         function httpReq(url) {
             var answer;
             $.ajax({
@@ -36,7 +37,35 @@
             return answer;
         }
 
+        // check mikone ke aia tedad e notif ha update hast ia na ...
+        function getNumberOfItemInDIV(parent, getChildrensChildren){
+            var relevantChildren = 0;
+            var children = parent.childNodes.length;
+            for(var i=0; i < children; i++){
+                if(parent.childNodes[i].nodeType != 3){
+                    if(getChildrensChildren)
+                        relevantChildren += getCount(parent.childNodes[i],true);
+                    relevantChildren++;
+                }
+            }
+            return relevantChildren;
+        }
+
+        // age user rooie notif hash click kone, ejra mishe
+        function Clicked(userID,notifPK) {
+            alert(String(userID));
+            alert(String(notifPK));
+            //TODO 1 notif ro az list pak mikonim
+            //TODO 2 erja midim be safheie search
+        }
+
         $(document).ready(function () {
+
+            //Now these are for Semantic
+            //Activating dropdown Menu :)
+              $(".ui.dropdown")  .dropdown({
+                on: 'hover'
+              }) ;
 
 
 
@@ -44,16 +73,39 @@
             function HeartBeat(){
                 // do whatever you like here
                 var url = "http://127.0.0.1:8000/searchSTH/showAllNotif/";
-                var userID=2;    /*TODO in baiad az karbar gerefte beshe*/
+                var userID=1;    /*TODO in baiad az profile e karbar be dast biad ...*/
 
                 var notifs= httpReq(url+String(userID));
-                alert(notifs);
+{#                alert(notifs);#}
                 myData = jQuery.parseJSON( notifs );
-{#                alert(myData[0]["model"]);#}
-                alert(myData[0]["fields"]["content"]);
+
+                var x = myData.length-1;
+                var element = document.getElementById("NotifButton");
+                if (getNumberOfItemInDIV(element, false)-1 != x) {
+                    element.innerHTML = "";
+                    document.getElementById("notifAmount").innerHTML=x+1;
+                    while (x >= 0) {
+                        data = myData[x]["fields"]["content"];
+                        KEY = myData[x]["pk"];
+                        /*
+                        each element should be like this:
+                        <div class="item" onClick=Clicked(userID="hi",notifPK="sina");>Book 1</div>
+                         */
+                        element.innerHTML = element.innerHTML +
+                                "<div class=\"item\"" +
+                                "onClick=Clicked(userID="+
+                                userID+
+                                ",notifPK=" +
+                                KEY +
+                                ");>"
+                                +data+
+                                "</div>";
+                        x--;
+                    }
+                }
 
 
-                setTimeout(HeartBeat, 3000);	//Call this function 2sec later
+                setTimeout(HeartBeat, 10000);	//Call this function 2sec later
             }
             //run that func for the first time ;)
             HeartBeat();
@@ -68,6 +120,17 @@
 
 </head>
 <body>
+
+
+{#    TODO in alan oon dokmeie Notif hast#}
+    <br>
+    <div class="ui dropdown button" id="#top_panel_dropdown">
+        <!--<i class="icon mail"></i>-->Your Notifications	<div class="floating ui red label" id="notifAmount">0</div>	<!--<div class="ui label">5</div><i class="dropdown icon"></i>	-->
+     <div class="menu" id="NotifButton">
+        <div class="item" onClick=Clicked(ID="hi",notifPK="sina");>Book 1</div>
+        <div class="item">Book 2</div>
+     </div>
+    </div>
 
 
 </body>
