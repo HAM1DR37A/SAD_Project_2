@@ -140,16 +140,21 @@ class BookMaker(models.Model):
 #     class Meta:
 #         unique_together = ('book_maker_id', 'language_name')
 
-'''
 class TranslationRequest(models.Model):
-    book_file = models.FileField()
+    # book_file = models.FileField()
+    source_lang = models.ForeignKey(Language,null=False)
     translation_request_id = models.IntegerField(primary_key=True, auto_created=True)
-    user_id = models.ForeignKey(BookReaderUser, on_delete=models.PROTECT)
-    book_maker_id = models.ForeignKey(BookMaker, on_delete=models.PROTECT, null=True)
-    register_date = models.DateField()
-    response_date = models.DateField()
-    finish_date = models.DateField()
-'''
+    # user_id = models.ForeignKey(BookReaderUser, on_delete=models.PROTECT)
+    # book_maker_id = models.ForeignKey(BookMaker, on_delete=models.PROTECT, null=True)
+    # register_date = models.DateField()
+    # response_date = models.DateField()
+    # finish_date = models.DateField()
+#     TODO added byME
+    BookName = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.BookName
+
 
 class Notification(models.Model):
     notif_id = models.IntegerField(primary_key=True, auto_created=True)
