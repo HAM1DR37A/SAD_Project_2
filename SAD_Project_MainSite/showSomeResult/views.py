@@ -56,7 +56,7 @@ def bootiTest(request):
     return render(request, 'showSomeResult/bootiTest.html')
 
 
-
+# THIS IS SEARCH PART
 from .forms import NameForm
 def search(request):
     if request.method == 'POST':
@@ -68,8 +68,20 @@ def search(request):
     else:
         form = NameForm()
 
-    return render(request, 'showSomeResult/SearchingTarjomeList.html',{'form': form})
+    return render(request, 'showSomeResult/SearchTarjomeListForm.html',{'form': form})
 
 
+
+# THIS IS NOTIF TEST PAGE
 def notif(request):
     return render(request, 'showSomeResult/NotifTemplate.html')
+
+# THIS IS FOR RESPONSE TO NOTIF REQUESTS
+from .models import BookMaker, Notification
+from django.http import JsonResponse
+from django.core import serializers
+def responseToNotifJava(request, userID):
+    user = BookMaker.objects.get(book_maker_id=userID) #TODO in khat fln ke ezafii be nazar mirese, kolan model ha kheili irad darand :|
+    notifs = list(Notification.objects.filter(BookMaker_id=user.book_maker_id))
+    posts_serialized = serializers.serialize('json', notifs)
+    return JsonResponse(posts_serialized, safe=False)

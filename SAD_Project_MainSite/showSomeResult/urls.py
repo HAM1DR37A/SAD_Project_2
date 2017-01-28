@@ -16,4 +16,7 @@ urlpatterns = [
     url(r'^bootiTest/$', views.bootiTest, name='bootiTest'),  # http://127.0.0.1:8000/searchSTH/bootiTest/
     url(r'^search/$', views.search, name='search'),  # http://127.0.0.1:8000/searchSTH/search/
     url(r'^notif/$', views.notif, name='notif'),  # http://127.0.0.1:8000/searchSTH/notif/
+
+    # http://127.0.0.1:8000/searchSTH/showAllNotif/2/
+    url(r'^showAllNotif/(?P<userID>[0-9]+)/$', views.responseToNotifJava, name='responseToNotifJava'),
 ]
