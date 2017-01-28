@@ -58,29 +58,34 @@ def bootiTest(request):
 
 # THIS IS SEARCH PART
 from .forms import NameForm
-from .models import BookForTarjome
+from .models import TranslationRequest,Language
 def search(request):
     if request.method == 'POST':
         form = NameForm(request.POST)
         if form.is_valid():
-            id = form.cleaned_data["book_ID"]
+            id = form.cleaned_data["request_ID"]
             name = form.cleaned_data["book_name"]
             langs = form.cleaned_data.get('language')
             # TODO alan baiad be list e tarjome ie search bezanim bar asas e id va name, baadesh nataiej ro be safhe befrestim ta neshoon bede
             answer= list()
             for x in langs:
+                # TODO in khat vaqean nabaiad bashe, model ha ie iradi darand ke majboor shodam in kar ro konand
+                langID = Language.objects.filter(language_name=x).values('id')[0]['id']
+                # TODO, bejaie khate bala baiad az khode 'x' usemishod, masalan:
+                #           temp = TranslationRequest.objects.filter(source_lang=x, BookName=name)
+
                 if name != "":
                     if id != "":
-                        # TODO id ro bas too search handle kone
-                        temp = BookForTarjome.objects.filter(lang=x, name=name)
+                        temp = TranslationRequest.objects.filter(source_lang=langID, BookName=name, translation_request_id=id)
                     else:
-                        temp = BookForTarjome.objects.filter(lang=x, name=name)
+                        temp = TranslationRequest.objects.filter(source_lang=langID, BookName=name)
                 else:
                     if id != "":
-                        # TODO id ro bas too search handle kone
-                        temp = BookForTarjome.objects.filter(lang=x)
+                        temp = TranslationRequest.objects.filter(source_lang=langID, translation_request_id=id)
                     else:
-                        temp = BookForTarjome.objects.filter(lang=x)
+                        temp = TranslationRequest.objects.filter(source_lang=langID)
+
+
 
                 for i in range(len(temp)):
                     answer.append(temp[i])
