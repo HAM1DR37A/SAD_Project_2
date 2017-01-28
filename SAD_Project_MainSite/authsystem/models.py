@@ -166,6 +166,7 @@ class BookMakerRating(models.Model):
 
 class TranslationRequest(models.Model):
     book_file = models.FileField()
+    source_lang = models.ForeignKey(Language,null=False)
     translation_request_id = models.IntegerField(primary_key=True, auto_created=True)
     user_id = models.ForeignKey(BookReaderUser, on_delete=models.PROTECT)
     book_maker_id = models.ForeignKey(BookMaker, on_delete=models.PROTECT, null=True)
@@ -226,3 +227,10 @@ class Notification(models.Model):
     notif_date_created = models.DateField(null=False)
     BookMaker_id = models.ForeignKey(BookReaderUser)
 
+
+class TranslatedBook(models.Model):
+    translated_book_file = models.FileField(null=False)
+    request = models.ForeignKey(TranslationRequest, null=False, on_delete=models.PROTECT)
+    translator = models.ForeignKey(BookMaker, null=False, on_delete=models.PROTECT)
+    class Meta:
+        unique_together = ('request', 'translator')
