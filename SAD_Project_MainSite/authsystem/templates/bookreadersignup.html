@@ -1,10 +1,37 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+    <meta charset="UTF-8">
+    <title>Sholegram</title>
+    <link rel="stylesheet" type="text/css" href="{% static "signup.css" %}" />
+    <script src="{%  static "angular.min.js" %}" type="text/javascript"></script>
+    <script src="{%  static "signup.js" %}" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body ng-app="signupapp" ng-controller="signupcontroller">
 
-{% block body %}
-    <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
-        {{ form.as_p }}
-    <input type="submit" value="Save" />
-</form>
+    <div id="login-box">
+  <div class="left ">
+    <h1>ثبت نام</h1>
 
-{% endblock %}
+
+      <input ng-model="first_name" type="text" placeholder="نام" />
+      <input ng-model="last_name" type="text" placeholder="نام خانوادگی" />
+      <input ng-model="tel_no" type="tel" placeholder="شماره تلفن" />
+      <input ng-model="email" type="email" placeholder="رایانامه" />
+      <input ng-model="username" type="text" placeholder="نام کاربری" />
+      <input ng-model="password" type="password" placeholder="گذرواژه" />
+      <input ng-model="r_password" type="password" placeholder="تکرار گذرواژه" />
+      <textarea ng-model="address" placeholder="آدرس"></textarea>
+
+    <input ng-click="send()" type="submit" name="signup_submit" value="ثبت نام" />
+{#      <p ng-show="signup_response['status']=='siktir'">your sign up failed</p>#}
+      <p ng-hide="status">your sign up failed</p>
+  </div>
+
+</div>
+
+</body>
+</html>
 

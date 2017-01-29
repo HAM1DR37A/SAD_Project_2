@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+    <meta charset="UTF-8">
+    <title>Simgan</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static "main.css" %}" />
+</head>
+<body>
+
+    <div class="navbar navbar-default">
+        <div id="logo">
+            <a href="/">
+             <img alt="Goodreads: Book reviews, recommendations, and discussion" src="{% static "simgan.png"%}">
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="#">کتاب ها</a></li>
+                <li><a href="#">خانه</a></li>
+                {#                <li class="dropdown">#}
+{#                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>#}
+{#                    <ul class="dropdown-menu">#}
+{#                        <li><a href="#">Action</a></li>#}
+{#                        <li><a href="#">Another action</a></li>#}
+{#                        <li><a href="#">Something else here</a></li>#}
+{#                        <li role="separator" class="divider"></li>#}
+{#                        <li><a href="#">Separated link</a></li>#}
+{#                        <li role="separator" class="divider"></li>#}
+{#                        <li><a href="#">One more separated link</a></li>#}
+{#                    </ul>#}
+{#                </li>#}
+            </ul>
+        </div>
+        <form id="search_book" autocomplete="off" action="/search" role="search" aria-label="Search for books to add to your shelves">
+            <input class="searchBox__input searchBox__input--navbar rtl" id="search_box" autocomplete="off" name="q" type="text" placeholder="جست و جوی کتاب" aria-label="Search books" aria-controls="searchResults">
+            <button type="submit" class="searchBox__icon searchBox__icon--magnifyingGlass gr-iconButton glyphicon glyphicon-search" aria-label="Search" ></button>
+{#            <button type="submit" class="glyphicon glyphicon-search" aria-hidden="true"></button>#}
+        </form>
+{#        <div>#}
+{#            <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">Mark Otto</a></p>#}
+{#        </div>#}
+        <div class="login-main rtl">
+            <input type="text" placeholder="نام کاربری" class="box1 border1 rtl">
+            <input type="password" placeholder="گذرواژه" class="box1 border2 rtl">
+            <input type="submit" class="send rtl" value="ورود">
+            <p id="regiser"><a href="/signup">ثبت نام</a></p>
+            <p id="forget">گذرواژه خود را فراموش کرده اید؟<a href="#">اینجا کلیک کن</a></p>
+        </div>
+    </div>
+    <div id="background">
+        <div class="topTenBooks">
+            <div class="rtl" id="topTenTitle">
+                <p>ده کتاب برتر:</p>
+            </div>
+            <div id="book1">
+                <div>
+                    <img class="images" width="100" height="100" src="{% static "1.jpg" %}" >
+                    <a  class="bookName rtl" href="#">من پیش از تو</a>
+                </div>
+            </div>
+            <div id="book2">
+                <div>
+                    <img class="images" width="100" height="100" src="{% static "2.jpg" %}" >
+                    <a  class="bookName rtl" href="#">من پیش از تو</a>
+                </div>
+            </div>
+            <div id="book3">
+                <div>
+                    <img class="images" width="100" height="100" src="{% static "3.jpg" %}" >
+                    <a  class="bookName rtl" href="#">من پیش از تو</a>
+                </div>
+            </div>
+            <div id="book4">
+                <div>
+                    <img class="images" width="100" height="100" src="{% static "4.jpg" %}" >
+                    <a  class="bookName rtl" href="#">من پیش از تو</a>
+                </div>
+            </div>
+            <div id="book5">
+                <div>
+                    <img class="images" width="100" height="100" src="{% static "5.jpg" %}" >
+                    <a  class="bookName rtl" href="#">من پیش از تو</a>
+                </div>
+            </div>
+            <div id="book6">
+                <div>
+                    <img class="images" width="100" height="100" src="{% static "6.jpg" %}" >
+                    <a  class="bookName rtl" href="#">من پیش از تو</a>
+                </div>
+            </div>
+            <div id="book7">
+                <div>
+                    <img class="images" width="100" height="100" src="{% static "7.jpg" %}" >
+                    <a  class="bookName rtl" href="#">من پیش از تو</a>
+                </div>
+            </div>
+            <div id="book8">
+                <div>
+                    <img class="images" width="100" height="100" src="{% static "8.jpg" %}" >
+                    <a  class="bookName rtl" href="#">من پیش از تو</a>
+                </div>
+            </div>
+            <div id="book9">
+                <div>
+                    <img class="images" width="100" height="100" src="{% static "9.jpg" %}" >
+                    <a  class="bookName rtl" href="#">من پیش از تو</a>
+                </div>
+            </div>
+            <div id="book10">
+                <div>
+                    <img class="images" width="100" height="100" src="{% static "10.jpg" %}" >
+                    <a  class="bookName rtl" href="#">من پیش از تو</a>
+                </div>
+            </div>
+        </div>
+        <div class="bookOfToday">
+            <div id="bookOfToday">
+                <div>
+                    <img class="images" width="100" height="100" src="{% static "10.jpg" %}" >
+                    <a  class="bookName rtl" href="#">من پیش از تو</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
