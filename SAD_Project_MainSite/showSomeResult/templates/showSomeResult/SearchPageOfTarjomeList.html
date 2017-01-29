@@ -16,6 +16,16 @@
     <script src="{% static 'showSomeResult/SemanticThings/jquery.min.js' %}"></script>
     <script src="{% static 'showSomeResult/SemanticThings/semantic.js' %}"></script>
     <script type="text/javascript">
+        var userID=1;    /*TODO in baiad az profile e karbar be dast biad ...*/
+        function Clicked(reqID) {
+            //TODO notif haie marbootash baiad az DB pak Beshe ==> marboot be tarahie model hast
+            //TODO req e marboot be in ham baiad az DB pak beshe ...
+            var motarjemID = userID;
+            window.location = "http://127.0.0.1:8000/searchSTH/sendRequestAcceptanceToHamid/"+motarjemID+"/"+reqID;
+        }
+
+
+
         $(document).ready(function () {
          /*   $('.ui.form')
               .form({
@@ -179,9 +189,12 @@
 
     <br>
     <div>
-          {% for book in bookList %}
-            <li>{{ book }}</li>
-          {% endfor %}
+      {% for book in bookList %}
+        <li>
+            {{ book.bookName }}
+            <button class="ui button" type="submit" onClick=Clicked({{ book.reqID }})>Accept Translation</button>
+        </li>
+      {% endfor %}
 {#        {{ bookList }}#}
     </div>
 

@@ -53,7 +53,7 @@ def getNewTarjomeReq(request, book_id):
 
 
 def bootiTest(request):
-    return render(request, 'showSomeResult/bootiTest.html')
+    return render(request, 'showSomeResult/bootStrapTest.html')
 
 
 # THIS IS SEARCH PART
@@ -68,6 +68,7 @@ def search(request):
             langs = form.cleaned_data.get('language')
             # TODO alan baiad be list e tarjome ie search bezanim bar asas e id va name, baadesh nataiej ro be safhe befrestim ta neshoon bede
             answer= list()
+            reqIdList=list()
             for x in langs:
                 # TODO in khat vaqean nabaiad bashe, model ha ie iradi darand ke majboor shodam in kar ro konam
                 langID = Language.objects.filter(language_name=x).values('id')[0]['id']
@@ -88,7 +89,8 @@ def search(request):
 
 
                 for i in range(len(temp)):
-                    answer.append(temp[i])
+                    test  = {'bookName': temp[i], 'reqID': temp[i].translation_request_id }
+                    answer.append(test)
 
             return render(request,'showSomeResult/SearchPageOfTarjomeList.html',{'bookList':answer})
     else:
