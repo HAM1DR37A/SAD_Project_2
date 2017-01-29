@@ -132,6 +132,9 @@ class BookMaker(models.Model):
     def __str__(self):
         return self.name+" "+self.last_name
 
+    def get_model_fields(model):
+        return model._meta.fields
+
 
 # class BookMakerLanguage(models.Model):
 #     book_maker_id = models.ForeignKey(BookMaker, on_delete=models.CASCADE)

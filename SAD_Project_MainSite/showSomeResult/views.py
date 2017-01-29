@@ -120,3 +120,14 @@ def hamidpart(request,motarjemID,requestID):
     bookName = TranslationRequest.objects.get(translation_request_id=requestID).__str__()
     return HttpResponse("I connect ("+user+") to translation of ("+bookName+") ")
 
+
+from .models import BookMaker, Notification
+def deleteNotif(request, userID, notifPK):
+    # vase in ino gozashtim ke aval check beshe ke aia intour user ii darim ia na
+    userOBJ = BookMaker.objects.get(book_maker_id=userID)
+    notifOBJ = Notification.objects.get(pk=notifPK)
+    if notifOBJ.BookMaker_id.book_maker_id == userOBJ.book_maker_id:
+        # TODO hala inja baiad in notif ro az DB pak konim
+        return HttpResponse("done")
+
+    return HttpResponse("Wrong")
