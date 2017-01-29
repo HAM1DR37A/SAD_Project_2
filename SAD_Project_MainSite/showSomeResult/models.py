@@ -162,6 +162,9 @@ class Notification(models.Model):
     notif_date_created = models.DateField(null=False)
     # TODO in khat e paiini eslah shod
     BookMaker_id = models.ForeignKey(BookMaker)
+    # TODO in khat taze ezafe shod
+    request_id = models.ForeignKey(TranslationRequest, on_delete=models.PROTECT, default=1)
+
 
     def __str__(self):
         return self.content

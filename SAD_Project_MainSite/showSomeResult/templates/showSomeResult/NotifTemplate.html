@@ -52,11 +52,15 @@
         }
 
         // age user rooie notif hash click kone, ejra mishe
-        function Clicked(userID,notifPK) {
+        function Clicked(userID,notifPK,requestID) {
             alert(String(userID));
             alert(String(notifPK));
             //TODO 1 notif ro az list pak mikonim
-            //TODO 2 erja midim be safheie search
+
+            //TODO 2 erja midim be safheie ghaboole tarjomeRequest, vase hamin req-ID ro ham mikham
+            // piade sazie in safhe ba hamid boodesh
+            var motarjemID=userID;
+            window.location = "http://127.0.0.1:8000/searchSTH/sendRequestAcceptanceToHamid/"+motarjemID+"/"+requestID;
         }
 
         $(document).ready(function () {
@@ -97,6 +101,7 @@
                                 userID+
                                 ",notifPK=" +
                                 KEY +
+                                ",requestID="+10+
                                 ");>"
                                 +data+
                                 "</div>";

@@ -111,3 +111,12 @@ def responseToNotifJava(request, userID):
     notifs = list(Notification.objects.filter(BookMaker_id=user.book_maker_id))
     posts_serialized = serializers.serialize('json', notifs)
     return JsonResponse(posts_serialized, safe=False)
+
+
+# vazifeie piade sazi e in ghesmat ba hamid hast
+from .models import BookMaker, TranslationRequest
+def hamidpart(request,motarjemID,requestID):
+    user = BookMaker.objects.get(book_maker_id=motarjemID).__str__()
+    bookName = TranslationRequest.objects.get(translation_request_id=requestID).__str__()
+    return HttpResponse("I connect ("+user+") to translation of ("+bookName+")")
+
