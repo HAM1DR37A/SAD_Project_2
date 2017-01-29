@@ -18,8 +18,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'showSomeResult.apps.ShowsomeresultConfig',
-    # 'authsystem',
+    # 'showSomeResult.apps.ShowsomeresultConfig',
+    'authsystem.apps.ContentConfig',
     'SAD_Project_MainSite'
     # 'ScheduledThingsApp',
     # 'django_celery_beat',

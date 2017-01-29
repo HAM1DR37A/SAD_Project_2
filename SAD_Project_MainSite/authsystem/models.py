@@ -45,17 +45,17 @@ class Book(models.Model):
 
 
 # this entity is the genre
-class Genre(models.Model):
-    genre_type = models.CharField(max_length=20,null=False, primary_key=True)
+# class Genre(models.Model):
+#     genre_type = models.CharField(max_length=20,null=False, primary_key=True)
 
 
-# this entity represents relation between book and genre
-class GenreBook(models.Model):
-    genre_type = models.ForeignKey(Genre, on_delete= models.PROTECT)
-    book_id = models.ForeignKey(Book, on_delete=models.CASCADE, null=False)
-
-    class Meta:
-        unique_together = ('genre_type', 'book_id')
+# # this entity represents relation between book and genre
+# class GenreBook(models.Model):
+#     genre_type = models.ForeignKey(Genre, on_delete= models.PROTECT)
+#     book_id = models.ForeignKey(Book, on_delete=models.CASCADE, null=False)
+#
+#     class Meta:
+#         unique_together = ('genre_type', 'book_id')
 
 
 class BookSeller(models.Model):

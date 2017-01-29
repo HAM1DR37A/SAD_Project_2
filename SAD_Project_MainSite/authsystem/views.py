@@ -1,7 +1,7 @@
 import json
 from django.shortcuts import render, redirect, render_to_response
 from django.views.generic.edit import CreateView
-from SAD_Project_MainSite.authsystem.models import BookReaderUser, BookMaker
+from .models import BookReaderUser, BookMaker
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
