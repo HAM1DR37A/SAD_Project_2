@@ -1,0 +1,321 @@
+
+#search_box{
+    background: #FFFFFF;
+    border-radius: 3px;
+    border: #DCD6CC 1px solid;
+    color: #333333;
+    font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+    /* resize: none; */
+    text-indent: 3%;
+    width: 100%;
+    height: 100%;
+}
+
+/*.searchBox__icon--magnifyingGlass {*/
+    /*!*background: url(/assets/layout/header/icn_nav_search.svg) no-repeat;*!*/
+    /*right: 4px;*/
+    /*top: 6.5px;*/
+/*}*/
+/*.searchBox__icon {*/
+    /*display: -moz-inline-stack;*/
+    /*display: inline-block;*/
+    /*height: 19px;*/
+    /*position: relative;*/
+    /*width: 18px;*/
+/*}*/
+/*.searchBox *, .searchBox *:before, .searchBox *:after {*/
+    /*box-sizing: inherit;*/
+/*}*/
+.gr-iconButton {
+    -moz-appearance: none;
+    /* right: 176px; */
+    width: 10%;
+    height: 10%;
+    position: absolute;
+    right: 90%;
+    top: 30%;
+    -webkit-appearance: none;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    color: #767676;
+    cursor: pointer;
+}
+#search_book {
+    width: 22%;
+    height: 60%;
+    top: 20%;
+    position: absolute;
+    /* left: 65%; */
+    z-index: 100;
+    right: 30%;
+}
+
+
+.rtl {
+  direction: rtl;
+}
+.login-main {
+    width: 500px;
+    height: 60px;
+    position: absolute;
+    margin: auto;
+    top: 3px;
+    /* bottom: 0; */
+    left: 3px;
+    /* right: 0; */
+    background: #f4f1ea;
+    padding: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    border-radius: 10px;
+}
+#forget {
+  text-indent: 46%;
+    height: 20px;
+    position: absolute;
+}
+#regiser {
+    text-indent: 1%;
+    width: 100px;
+    height: 20px;
+    position: absolute;
+    z-index: 10;
+}
+.box1 {
+  background: #5f3d30;
+    height: 30px;
+    text-indent: 10px;
+    width: 45%;
+    margin-bottom: 2px;
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: 400;
+}
+.border1 {
+  -webkit-border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+  -ms-border-radius: 5px 5px 0 0;
+  -o-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+}
+.border2 {
+  -webkit-border-radius: 0px 0 5px 5px;
+  -moz-border-radius: 0px 0 5px 5px;
+  -ms-border-radius: 0px 0 5px 5px;
+  -o-border-radius: 0px 0 5px 5px;
+  border-radius: 0px 0 5px 5px;
+}
+.send {
+    width: 45px;
+    height: 45px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    border: 5px solid #dccfca;
+    background: #5f3d30;
+    font-size: 15px;
+    color: #fff;
+    font-weight: normal;
+    text-shadow: 1px 1px 2px #000;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.send:hover {
+  animation: spin 0.3s ease-in-out;
+  -webkit-animation: spin 0.3s ease-in-out;
+  -moz-animation: spin 0.3s ease-in-out;
+  -ms-animation: spin 0.3s ease-in-out;
+  -o-animation: spin 0.3s ease-in-out;
+  cursor: pointer;
+}
+#bs-example-navbar-collapse-1 {
+  position: absolute;
+    right: 16%;
+    top: 15%;
+}
+#logo {
+    position: absolute;
+    top: 18%;
+    right: 7%;
+    width: 110px;
+}
+.topTenBooks {
+    /*border: 2px solid black;*/
+    width: 80%;
+    height: 90%;
+    position: absolute;
+    left: 2%;
+    top: 70px;
+    background: #fff;
+}
+#topTenTitle {
+    right: 3%;
+    top: 1%;
+    position: relative;
+}
+#book1 {
+position: absolute;
+    width: 19%;
+    height: 45%;
+    /*border: 1px solid blue;*/
+    left: 0%;
+    top: 7%;
+}
+#book2 {
+    position: absolute;
+    width: 19%;
+    height: 45%;
+    /*border: 1px solid blue;*/
+    left: 19%;
+    top: 7%;
+}
+#book3 {
+    position: absolute;
+    width: 19%;
+    height: 45%;
+    /*border: 1px solid blue;*/
+    left: 38%;
+    top: 7%;
+}
+#book4 {
+    position: absolute;
+    width: 19%;
+    height: 45%;
+    /*border: 1px solid blue;*/
+    left: 57%;
+    top: 7%;
+}
+#book5 {
+    position: absolute;
+    width: 19%;
+    height: 45%;
+    /*border: 1px solid blue;*/
+    left: 76%;
+    top: 7%;
+}
+#book6 {
+    position: absolute;
+    width: 19%;
+    height: 45%;
+    /*border: 1px solid blue;*/
+    left: 0%;
+    top: 52%;
+}
+#book7 {
+    position: absolute;
+    width: 19%;
+    height: 45%;
+    /*border: 1px solid blue;*/
+    left: 19%;
+    top: 52%;
+}
+#book8 {
+    position: absolute;
+    width: 19%;
+    height: 45%;
+    /*border: 1px solid blue;*/
+    left: 38%;
+    top: 52%;
+}
+ #book9 {
+    position: absolute;
+    width: 19%;
+    height: 45%;
+    /*border: 1px solid blue;*/
+     left: 57%;
+    top: 52%;
+}
+ #book10 {
+    position: absolute;
+    width: 19%;
+    height: 45%;
+    /*border: 1px solid blue;*/
+     left: 76%;
+    top: 52%;
+}
+.quotes {
+
+}
+.images {
+    position: absolute;
+    width: 98%;
+    height: 80%;
+    display: block;
+    margin: 3px;
+}
+.bookName {
+    position: absolute;
+    right: 30%;
+    top:86%;
+    display: block;
+}
+#background {
+    width: 100%;
+    height: 90%;
+    position: absolute;
+    left: 0%;
+    top: 70px;
+    background: #e8dfca;
+}
+.bookOfToday {
+    border-left: 3px solid #e8dfca;
+    background: #fff;
+    width: 15%;
+    height: 80%;
+    position: absolute;
+    left: 83%;
+    top: 70px;
+}
+#bookOfToday {
+    position: absolute;
+    width: 19%;
+    height: 45%;
+    /*border: 1px solid blue;*/
+     left: 76%;
+    top: 52%;
+}
+.navbar-default {
+    height: 70px;
+    background-color: #f4f1ea;
+    border-color: #f4f1ea;
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-moz-keyframes spin {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+  to {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-o-keyframes spin {
+  from {
+    -o-transform: rotate(0deg);
+  }
+  to {
+    -o-transform: rotate(360deg);
+  }
+}

@@ -76,6 +76,8 @@ class SellBy(models.Model):
 
 
 # BookMaker
+# to determine whether a bookmaker account is verified or not, one should check verifier_id
+# if it's null, it means that it is not verified
 class BookMaker(models.Model):
     male = 'ML'
     female = 'FM'
@@ -91,13 +93,11 @@ class BookMaker(models.Model):
         (author, "Author"),
         (both, "Both")
     )
-    name = models.CharField(max_length=20, null=False)
-    last_name = models.CharField(max_length=20, null=False)
-    book_maker_id = models.CharField(max_length=10, auto_created=True, primary_key=True)
+    django_user = models.OneToOneField(User, null=False)
     birth_date = models.DateField()
     gender = models.CharField(max_length=2, choices=gender_choices)
     book_maker_type = models.CharField(max_length=4, choices=type_choices)
-    verifier_id = models.ForeignKey(Admin)
+    verifier_id = models.ForeignKey(Admin, null=True, default=models.SET_NULL)
     avatar = models.ImageField(null=False, default='user.png')
     telephone_no = models.CharField(max_length=15)
     address = models.CharField(max_length=150, null=False)
@@ -217,20 +217,21 @@ class BookComment(models.Model):
 class CommentReply(models.Model):
     reply_comment_id = models.IntegerField(primary_key=True, auto_created=True)
     book_comment_id = models.ForeignKey(BookComment)
-    user_id = models.ForeignKey(BookReaderUser) #id of the person who wrote reply
+    user_id = models.ForeignKey(BookReaderUser)  # id of the person who wrote reply
     content = models.TextField()
 
 
 class Notification(models.Model):
-    notif_id = models.IntegerField(primary_key=True, auto_created=True)
-    content = models.TextField()
+    notif_id = models.IntegerField(primary_key=True)
+    content = models.TextField(null=False)
     notif_date_created = models.DateField(null=False)
-    BookMaker_id = models.ForeignKey(BookReaderUser)
-
+    BookMaker_id = models.ForeignKey(BookMaker, null=False, on_delete=models.CASCADE)
+    request_id = models.ForeignKey(TranslationRequest, null=False, on_delete=models.CASCADE)
 
 class TranslatedBook(models.Model):
     translated_book_file = models.FileField(null=False)
     request = models.ForeignKey(TranslationRequest, null=False, on_delete=models.PROTECT)
     translator = models.ForeignKey(BookMaker, null=False, on_delete=models.PROTECT)
+
     class Meta:
         unique_together = ('request', 'translator')
