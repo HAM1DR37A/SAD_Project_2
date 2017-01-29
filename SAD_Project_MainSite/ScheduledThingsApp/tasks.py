@@ -55,10 +55,26 @@ def setup_periodic_tasks(sender, **kwargs):
 # }
 app.conf.timezone = 'UTC'
 
+import requests
+import time
+
 
 @app.task
-def test(arg):
-    print(arg)
+def test():
+    print("Daily task is started")
+    secretKey = "justShowMeTheBirthDay"
+    url = "http://127.0.0.1:8000/searchSTH/getBirthsOfUsers/"
+
+    req = requests.get(url+secretKey)
+
+    if(req.status_code != 200):
+        print("right now the server is down, I will retry 5min later")
+        time.sleep(60*5)  # delays for 5 minutes
+        test()
+
+
+
+
 
 
 
