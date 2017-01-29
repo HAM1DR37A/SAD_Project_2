@@ -31,7 +31,7 @@
                     answer=data;
                 },
                 error: function(){
-                    alert("Oh shit");
+                    alert("Oh no, can't access to:"+String(url));
                 }
             });
             return answer;
@@ -51,12 +51,23 @@
             return relevantChildren;
         }
 
-        // age user rooie notif hash click kone, ejra mishe
-        function Clicked(userID,notifPK) {
-            alert(String(userID));
-            alert(String(notifPK));
+        // age user rooie notif hash click kone, in func ejra mishe
+        function Clicked(userID,notifPK,requestID) {
+{#            alert("this userID: "+String(userID));#}
+{#            alert("this notifPK: "+String(notifPK));#}
+{#            alert("this is reqID: "+String(requestID));#}
             //TODO 1 notif ro az list pak mikonim
-            //TODO 2 erja midim be safheie search
+            var url = "http://127.0.0.1:8000/searchSTH/deleteNotif/";
+            var response= httpReq(url+String(userID)+"/"+String(notifPK));
+            if (response == "done") {
+                //TODO 2 erja midim be safheie ghaboole tarjomeRequest, vase hamin req-ID ro ham mikham
+                // piade sazie in safhe ba hamid boodesh
+                var motarjemID = userID;
+                window.location = "http://127.0.0.1:8000/searchSTH/sendRequestAcceptanceToHamid/" + motarjemID + "/" + requestID;
+            }
+            else {
+                alert("sth went wrong OR you are not allow to do this")
+            }
         }
 
         $(document).ready(function () {
@@ -87,16 +98,17 @@
                     while (x >= 0) {
                         data = myData[x]["fields"]["content"];
                         KEY = myData[x]["pk"];
+                        reqID = myData[x]["fields"]["request_id"];
                         /*
                         each element should be like this:
                         <div class="item" onClick=Clicked(userID="hi",notifPK="sina");>Book 1</div>
                          */
                         element.innerHTML = element.innerHTML +
                                 "<div class=\"item\"" +
-                                "onClick=Clicked(userID="+
-                                userID+
-                                ",notifPK=" +
-                                KEY +
+                                "onClick=Clicked(" +
+                                    "userID="+userID+
+                                    ",notifPK=" +KEY +
+                                    ",requestID="+reqID+
                                 ");>"
                                 +data+
                                 "</div>";

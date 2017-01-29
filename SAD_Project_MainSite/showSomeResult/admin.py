@@ -4,13 +4,13 @@ from django.contrib import admin
 from .models import TopGenre, BookForTarjome, motarjem
 
 # admin.site.register(TopGenre)
-# admin.site.register(BookForTarjome)
+admin.site.register(BookForTarjome)
 # admin.site.register(motarjem)
 
 ########################
 ##### Hamid's Models
 ########################
-from .models import BookReaderUser, Language, Book, Genre, BookSeller, BookMaker#, BookMakerLanguage, TranslationRequest
+from .models import BookReaderUser, Language, Book, Genre, BookSeller, BookMaker, TranslationRequest#, BookMakerLanguage
 from .models import Notification
 
 admin.site.register(Notification)
@@ -23,4 +23,4 @@ admin.site.register(BookSeller)
 
 admin.site.register(BookMaker)
 # admin.site.register(BookMakerLanguage)
-# admin.site.register(TranslationRequest)
+admin.site.register(TranslationRequest)

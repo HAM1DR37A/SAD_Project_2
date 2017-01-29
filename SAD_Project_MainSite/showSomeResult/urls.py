@@ -19,4 +19,10 @@ urlpatterns = [
 
     # http://127.0.0.1:8000/searchSTH/showAllNotif/2/
     url(r'^showAllNotif/(?P<userID>[0-9]+)/$', views.responseToNotifJava, name='responseToNotifJava'),
+
+    # http://127.0.0.1:8000/searchSTH/sendRequestAcceptanceToHamid/1/1
+    url(r'^sendRequestAcceptanceToHamid/(?P<motarjemID>[0-9]+)/(?P<requestID>[0-9]+)/$',views.hamidpart, name='hamidpart'),
+
+    # http://127.0.0.1:8000/searchSTH/deleteNotif/1/1
+    url(r'^deleteNotif/(?P<userID>[0-9]+)/(?P<notifPK>[0-9]+)/$', views.deleteNotif,name='deleteNotif'),
 ]
