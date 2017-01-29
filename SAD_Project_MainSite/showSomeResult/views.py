@@ -118,5 +118,5 @@ from .models import BookMaker, TranslationRequest
 def hamidpart(request,motarjemID,requestID):
     user = BookMaker.objects.get(book_maker_id=motarjemID).__str__()
     bookName = TranslationRequest.objects.get(translation_request_id=requestID).__str__()
-    return HttpResponse("I connect ("+user+") to translation of ("+bookName+")")
+    return HttpResponse("I connect ("+user+") to translation of ("+bookName+") ")
 
