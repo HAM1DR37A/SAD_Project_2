@@ -8,6 +8,7 @@ sqlalchemy>=1.0.14
 celery>=4.0
 
 to use this first we need to run rabbitMQ-server
+root@dhcppc3:/home/sina/Downloads# rabbitmq-server 
 
 then we need to run celery worker using this command in this folder:
 celery -A tasks worker -B --loglevel=info
