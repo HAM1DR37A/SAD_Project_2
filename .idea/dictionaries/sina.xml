@@ -3,6 +3,7 @@
     <words>
       <w>amqp</w>
       <w>confliction</w>
+      <w>smtp</w>
       <w>sqlite</w>
     </words>
   </dictionary>
