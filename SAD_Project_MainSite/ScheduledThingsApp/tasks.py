@@ -15,7 +15,7 @@ app.conf.timezone = 'UTC'
 def send_hpd_msg():
     print("Daily task is started")
     secret_key = "justShowMeTheBirthDay"
-    url = "http://127.0.0.1:8000/searchSTH/get_births_of_users/"
+    url = "http://127.0.0.1:8000/searchSTH/getBirthsOfUsers/"
 
     req = requests.get(url+secret_key)
     if req.status_code != 200 :

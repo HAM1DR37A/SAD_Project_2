@@ -46,9 +46,6 @@ class BookReaderUser(models.Model):
     # telephone_no = models.CharField(max_length=15)
     # address = models.CharField(max_length=150, null=False)
 
-    def __str__(self):
-        return self.django_user
-
 
 class Language(models.Model):
     language_name = models.CharField(max_length= 10)

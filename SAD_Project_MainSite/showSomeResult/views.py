@@ -1,10 +1,15 @@
 from random import randint
 
 from django.shortcuts import render
-
-# Create your views here.
+from django.http import JsonResponse
+from django.core import serializers
 from django.http import HttpResponse
+from django.http import Http404
+
+from .forms import NameForm
+
 from .models import TopGenre, motarjem
+from .models import TranslationRequest,Language, BookMaker, Notification
 
 
 def guide(request):
@@ -38,8 +43,6 @@ def bootiTest(request):
 
 
 # THIS IS SEARCH PART
-from .forms import NameForm
-from .models import TranslationRequest,Language
 def search(request):
     if request.method == 'POST':
         form = NameForm(request.POST)
@@ -84,9 +87,6 @@ def notif(request):
 
 
 # THIS IS FOR RESPONSE TO NOTIF REQUESTS
-from .models import BookMaker, Notification
-from django.http import JsonResponse
-from django.core import serializers
 def response_to_notif_java(request, userID):
     user = BookMaker.objects.get(book_maker_id=userID) #TODO in khat fln ke ezafii be nazar mirese, kolan model ha kheili irad darand :|
     notifs = list(Notification.objects.filter(BookMaker_id=user.book_maker_id))
@@ -95,14 +95,12 @@ def response_to_notif_java(request, userID):
 
 
 # vazifeie piade sazi e in ghesmat ba hamid hast
-from .models import BookMaker, TranslationRequest
 def hamidpart(request,motarjemID,requestID):
     user = BookMaker.objects.get(book_maker_id=motarjemID).__str__()
     bookName = TranslationRequest.objects.get(translation_request_id=requestID).__str__()
     return HttpResponse("I connect ("+user+") to translation of ("+bookName+") ")
 
 
-from .models import BookMaker, Notification
 def delete_notification(request, userID, notifPK):
     # vase in ino gozashtim ke aval check beshe ke aia intour user ii darim ia na
     userOBJ = BookMaker.objects.get(book_maker_id=userID)
@@ -115,8 +113,6 @@ def delete_notification(request, userID, notifPK):
 
 
 # TODO baiad saiere user ha ro ham handle koni
-from django.http import Http404
-from .models import BookMaker
 def get_births_of_users(request, secretKey):
     if secretKey == "justShowMeTheBirthDay":
         answer = list()
