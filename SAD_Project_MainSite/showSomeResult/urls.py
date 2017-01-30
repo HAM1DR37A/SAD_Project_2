@@ -25,4 +25,8 @@ urlpatterns = [
 
     # http://127.0.0.1:8000/searchSTH/deleteNotif/1/1
     url(r'^deleteNotif/(?P<userID>[0-9]+)/(?P<notifPK>[0-9]+)/$', views.deleteNotif,name='deleteNotif'),
+
+    # http://127.0.0.1:8000/searchSTH/getBirthsOfUsers/justShowMeTheBirthDay
+    # http://127.0.0.1:8000/searchSTH/getBirthsOfUsers/STHelse
+    url(r'^getBirthsOfUsers/(?P<secretKey>[\w\-]+)/$', views.getBirthsOfUsers),
 ]

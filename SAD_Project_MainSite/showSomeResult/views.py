@@ -133,3 +133,19 @@ def deleteNotif(request, userID, notifPK):
         return HttpResponse("done")
 
     return HttpResponse("Wrong")
+
+
+# TODO baiad saiere user ha ro ham handle koni
+from django.http import Http404
+import json
+from .models import BookMaker
+def getBirthsOfUsers(request, secretKey):
+    if secretKey == "justShowMeTheBirthDay":
+        answer = list()
+        allUsers = BookMaker.objects.all().values('name', 'last_name', 'birth_date')
+        for x in allUsers:
+            answer.append(x)
+        return JsonResponse(answer, safe=False)
+
+    raise Http404("Don't try to do bad things ;)")
+    return HttpResponse(status=201, content="sorry")
