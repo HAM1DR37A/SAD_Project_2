@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.guide, name='guide'),                                  # http://127.0.0.1:8000/searchSTH/
-    url(r'^topGenre/$', views.show_top_genre, name='show_top_genre'),           # http://127.0.0.1:8000/searchSTH/topGenre/
+    url(r'^topGenre/$', views.show_top_genre, name='show_top_genre'),       # http://127.0.0.1:8000/searchSTH/topGenre/
 
     # http://127.0.0.1:8000/searchSTH/takhfif/2/
     url(r'^takhfif/(?P<buyedItems>[0-9]+)/$', views.getting_new_buy_request, name='getting_new_buy_request'),
