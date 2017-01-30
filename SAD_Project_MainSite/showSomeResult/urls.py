@@ -14,13 +14,13 @@ urlpatterns = [
     url(r'^takhfif/(?P<buyedItems>[0-9]+)/$', views.getting_new_buy_request, name='getting_new_buy_request'),
 
     # http://127.0.0.1:8000/searchSTH/showAllNotif/2/
-    url(r'^showAllNotif/(?P<userID>[0-9]+)/$', views.response_to_notif_java, name='response_to_notif_java'),
+    url(r'^showAllNotif/(?P<userID>[0-9]+)/$', views.response_to_notifications_requests_by_js, name='response_to_notifications_requests_by_js'),
 
     # http://127.0.0.1:8000/searchSTH/sendRequestAcceptanceToHamid/1/1
     url(r'^sendRequestAcceptanceToHamid/(?P<motarjemID>[0-9]+)/(?P<requestID>[0-9]+)/$',views.hamidpart, name='hamidpart'),
 
     # http://127.0.0.1:8000/searchSTH/deleteNotif/1/1
-    url(r'^deleteNotification/(?P<userID>[0-9]+)/(?P<notifPK>[0-9]+)/$', views.delete_notification, name='delete_notification'),
+    url(r'^deleteNotif/(?P<userID>[0-9]+)/(?P<notifPK>[0-9]+)/$', views.delete_notification, name='delete_notification'),
 
     # http://127.0.0.1:8000/searchSTH/getBirthsOfUsers/justShowMeTheBirthDay
     # http://127.0.0.1:8000/searchSTH/getBirthsOfUsers/STHelse

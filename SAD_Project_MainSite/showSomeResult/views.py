@@ -47,38 +47,36 @@ def search(request):
     if request.method == 'POST':
         form = NameForm(request.POST)
         if form.is_valid():
-            id = form.cleaned_data["request_ID"]
+            req_id = form.cleaned_data["request_ID"]
             name = form.cleaned_data["book_name"]
             langs = form.cleaned_data.get('language')
-            # TODO alan baiad be list e tarjome ie search bezanim bar asas e id va name, baadesh nataiej ro be safhe befrestim ta neshoon bede
-            answer= list()
-            reqIdList=list()
+            answer = list()
             for x in langs:
                 # TODO in khat vaqean nabaiad bashe, model ha ie iradi darand ke majboor shodam in kar ro konam
-                langID = Language.objects.filter(language_name=x).values('id')[0]['id']
-                # TODO, bejaie khate bala baiad az khode 'x' usemishod, masalan:
+                # bejaie khate paiin baiad az khode 'x' use mishod, masalan:
                 #           temp = TranslationRequest.objects.filter(source_lang=x, BookName=name)
+                langID = Language.objects.filter(language_name=x).values('id')[0]['id']
 
                 if name != "":
-                    if id != "":
-                        temp = TranslationRequest.objects.filter(source_lang=langID, BookName=name, translation_request_id=id)
+                    if req_id != "":
+                        temp = TranslationRequest.objects.filter(source_lang=langID, BookName=name, translation_request_id=req_id)
                     else:
                         temp = TranslationRequest.objects.filter(source_lang=langID, BookName=name)
                 else:
-                    if id != "":
-                        temp = TranslationRequest.objects.filter(source_lang=langID, translation_request_id=id)
+                    if req_id != "":
+                        temp = TranslationRequest.objects.filter(source_lang=langID, translation_request_id=req_id)
                     else:
                         temp = TranslationRequest.objects.filter(source_lang=langID)
 
                 for i in range(len(temp)):
-                    test = {'bookName': temp[i], 'reqID': temp[i].translation_request_id }
+                    test = {'bookName': temp[i], 'reqID': temp[i].translation_request_id}
                     answer.append(test)
 
-            return render(request,'showSomeResult/SearchPageOfTarjomeList.html',{'bookList':answer})
+            return render(request, 'showSomeResult/SearchPageOfTarjomeList.html', {'bookList': answer})
     else:
         form = NameForm()
 
-    return render(request, 'showSomeResult/SearchPageOfTarjomeList.html',{'form': form})
+    return render(request, 'showSomeResult/SearchPageOfTarjomeList.html', {'form': form})
 
 
 # THIS IS NOTIF TEST PAGE
@@ -87,25 +85,26 @@ def notif(request):
 
 
 # THIS IS FOR RESPONSE TO NOTIF REQUESTS
-def response_to_notif_java(request, userID):
-    user = BookMaker.objects.get(book_maker_id=userID) #TODO in khat fln ke ezafii be nazar mirese, kolan model ha kheili irad darand :|
-    notifs = list(Notification.objects.filter(BookMaker_id=user.book_maker_id))
-    posts_serialized = serializers.serialize('json', notifs)
+def response_to_notifications_requests_by_js(request, user_id):
+    user = BookMaker.objects.get(book_maker_id=user_id)
+    # elate vojiide khate bala ine ke check konim useri ba moshakhaste bala tooie DB hast ia na ...
+    notifications = list(Notification.objects.filter(BookMaker_id=user.book_maker_id))
+    posts_serialized = serializers.serialize('json', notifications)
     return JsonResponse(posts_serialized, safe=False)
 
 
 # vazifeie piade sazi e in ghesmat ba hamid hast
 def hamidpart(request,motarjemID,requestID):
     user = BookMaker.objects.get(book_maker_id=motarjemID).__str__()
-    bookName = TranslationRequest.objects.get(translation_request_id=requestID).__str__()
-    return HttpResponse("I connect ("+user+") to translation of ("+bookName+") ")
+    book_name = TranslationRequest.objects.get(translation_request_id=requestID).__str__()
+    return HttpResponse("I connect ("+user+") to translation of ("+book_name+") ")
 
 
 def delete_notification(request, userID, notifPK):
     # vase in ino gozashtim ke aval check beshe ke aia intour user ii darim ia na
-    userOBJ = BookMaker.objects.get(book_maker_id=userID)
-    notifOBJ = Notification.objects.get(pk=notifPK)
-    if notifOBJ.BookMaker_id.book_maker_id == userOBJ.book_maker_id:
+    user_obj = BookMaker.objects.get(book_maker_id=userID)
+    notification_obj = Notification.objects.get(pk=notifPK)
+    if notification_obj.BookMaker_id.book_maker_id == user_obj.book_maker_id:
         # TODO hala inja baiad in notif ro az DB pak konim
         return HttpResponse("done")
 
@@ -116,10 +115,9 @@ def delete_notification(request, userID, notifPK):
 def get_births_of_users(request, secretKey):
     if secretKey == "justShowMeTheBirthDay":
         answer = list()
-        allUsers = BookMaker.objects.all().values('name', 'last_name', 'birth_date')
-        for x in allUsers:
+        all_users = BookMaker.objects.all().values('name', 'last_name', 'birth_date')
+        for x in all_users:
             answer.append(x)
         return JsonResponse(answer, safe=False)
 
     raise Http404("Don't try to do bad things ;)")
-    return HttpResponse(status=201, content="sorry")
