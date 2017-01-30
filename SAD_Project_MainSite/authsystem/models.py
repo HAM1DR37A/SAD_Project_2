@@ -4,11 +4,16 @@ from django.utils import timezone
 from django.db.models.fields.related import ForeignKey
 
 
+# class Avatar(models.Model):
+#     avatar_id = models.CharField(primary_key=True, auto_created=True)
+#     avatar_image = models.ImageField(null=False)
+
+
 class BookReaderUser(models.Model):
     django_user = models.OneToOneField(User, null=False)
     avatar = models.ImageField(null=False, default='user.png')
     telephone_no = models.CharField(max_length=15)
-    address = models.CharField(max_length=150, null=False)
+    address = models.CharField(max_length=150, null=True)
 
 
 class OrganizationFinancialAccount(models.Model):
@@ -25,6 +30,7 @@ class Language(models.Model):
 
 
 class Admin(models.Model):
+    django_user = models.OneToOneField(User, null=False)
     name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     admin_id = models.IntegerField(primary_key=True, auto_created=True)
@@ -45,29 +51,31 @@ class Book(models.Model):
 
 
 # this entity is the genre
-# class Genre(models.Model):
-#     genre_type = models.CharField(max_length=20,null=False, primary_key=True)
+class Genre(models.Model):
+    genre_type = models.CharField(max_length=20,null=False, primary_key=True)
 
 
-# # this entity represents relation between book and genre
-# class GenreBook(models.Model):
-#     genre_type = models.ForeignKey(Genre, on_delete= models.PROTECT)
-#     book_id = models.ForeignKey(Book, on_delete=models.CASCADE, null=False)
-#
-#     class Meta:
-#         unique_together = ('genre_type', 'book_id')
+# this entity represents relation between book and genre
+class GenreBook(models.Model):
+    genre_type = models.ForeignKey(Genre, on_delete= models.PROTECT)
+    book_id = models.ForeignKey(Book, on_delete=models.CASCADE, null=False)
+
+    class Meta:
+        unique_together = ('genre_type', 'book_id')
 
 
 class BookSeller(models.Model):
+    django_user = models.OneToOneField(User, null=False)
     book_seller_id = models.CharField(max_length=15, auto_created=True, primary_key=True)
     avatar = models.ImageField(null=False, default='user.png')
     telephone_no = models.CharField(max_length=15)
     address = models.CharField(max_length=150, null=False)
+    is_verified = models.BooleanField(default=False)
 
 
 class SellBy(models.Model):
     price = models.FloatField(null= False)
-    number_of_copies = models.IntegerField(null= False)
+    number_of_copies = models.IntegerField(null=False)
     book_seller_id = models.ForeignKey(BookSeller, on_delete=models.CASCADE, null=False)
     book_id = models.ForeignKey(Book, on_delete=models.CASCADE, null=False)
 
@@ -75,9 +83,6 @@ class SellBy(models.Model):
         unique_together = ('book_id', 'book_seller_id')
 
 
-# BookMaker
-# to determine whether a bookmaker account is verified or not, one should check verifier_id
-# if it's null, it means that it is not verified
 class BookMaker(models.Model):
     male = 'ML'
     female = 'FM'
@@ -97,7 +102,7 @@ class BookMaker(models.Model):
     birth_date = models.DateField()
     gender = models.CharField(max_length=2, choices=gender_choices)
     book_maker_type = models.CharField(max_length=4, choices=type_choices)
-    verifier_id = models.ForeignKey(Admin, null=True, default=models.SET_NULL)
+    is_verified = models.BooleanField(default=False)
     avatar = models.ImageField(null=False, default='user.png')
     telephone_no = models.CharField(max_length=15)
     address = models.CharField(max_length=150, null=False)
@@ -227,6 +232,7 @@ class Notification(models.Model):
     notif_date_created = models.DateField(null=False)
     BookMaker_id = models.ForeignKey(BookMaker, null=False, on_delete=models.CASCADE)
     request_id = models.ForeignKey(TranslationRequest, null=False, on_delete=models.CASCADE)
+
 
 class TranslatedBook(models.Model):
     translated_book_file = models.FileField(null=False)

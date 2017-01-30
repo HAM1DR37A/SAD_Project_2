@@ -18,18 +18,6 @@ app.controller('signupcontroller', function ($scope, $http, $window) {
         $scope.user.tel_no = $scope.tel_no;
         $scope.user.address = $scope.address;
 
-
-        // $http({
-        //     url: '/signup/',
-        //     method: 'POST',
-        //     data: $scope.user
-        // })
-        //     .then(function(response) {
-        //         },
-        //         function(response) { // optional
-        //             // failed
-        //         });
-
         if($scope.r_password != $scope.password)
         {
             $scope.status = false;
@@ -39,17 +27,7 @@ app.controller('signupcontroller', function ($scope, $http, $window) {
 
         json_command = JSON.stringify($scope.user);
             $.post( "./", { command : json_command }, function( data ) {
-                // console.log( data );
-                // // $scope.signup_response=data;
-                // if(data['status']=="ok")
-                // {
-                //     console.log("kir")
-                //     $window.location.href="/admin/"
-                // }
-                // else if (data['status'] == "siktir")
-                // {
-                //     $scope.status = false;
-                // }
+
             });
 
     }

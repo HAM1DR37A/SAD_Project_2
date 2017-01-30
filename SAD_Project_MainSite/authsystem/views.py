@@ -10,7 +10,7 @@ from django.http import *
 
 
 @csrf_exempt
-def signup(request):
+def book_reader_signup(request):
     if request.method == "GET":
         return render(request, 'bookreadersignup.html')
     if request.method == "POST":
@@ -19,7 +19,7 @@ def signup(request):
         post_dict = dict(six.iterlists(request.POST))
         jso = json.loads(post_dict['command'][0])
         print(jso['first_name'])
-        d_user = User.objects.create(username=jso['username'] , password=jso['password'] ,first_name=jso['first_name'] , last_name=jso['last_name'] , email=jso['email'])
+        d_user = User.objects.create(username=jso['username'] , password=jso['password'] ,first_name=jso['first_name'] ,last_name=jso['last_name'] , email=jso['email'])
         user = BookReaderUser.objects.create(django_user=d_user,address=jso['address'], telephone_no=jso['tel_no'])
         user.save()
 
@@ -35,12 +35,28 @@ def book_maker_signup(request):
     jso = json.loads(post_dict['command'][0])
     d_user = User.objects.create(username=jso['username'], password=jso['password'], first_name=jso['first_name'],
                                  last_name=jso['last_name'], email=jso['email'])
-    user = BookMaker.objects.create(django_user=d_user, birth_date=jso['birth_date'], telephone_no=jso['tel_no'],
-                                        address=jso['address'], book_maker_type=jso['book_maker_type'],
-                                        gender=jso['gender'])
+    user = BookMaker.objects.create(django_user=d_user, birth_date=jso['birth_date'], telephone_no=jso['tel_no'],address=jso['address'], book_maker_type=jso['book_maker_type'], gender=jso['gender'])
     user.save()
 
 
-def main(request):
+@csrf_exempt
+def book_seller(request):
     if request.method == "GET":
-        return render(request, 'main.html')
+        return render(request, 'booksellersignup.html')
+    if request.method == "POST":
+        print(request.POST)
+
+    post_dict = dict(six.iterlists(request.POST))
+    jso = json.loads(post_dict['command'][0])
+    d_user = User.objects.create(username=jso['username'], password=jso['password'], first_name=jso['first_name'],
+                                 last_name=jso['last_name'], email=jso['email'])
+    user = BookMaker.objects.create(django_user=d_user, telephone_no=jso['tel_no'],
+                                    address=jso['address'])
+    user.save()
+
+
+
+    # verifying bookseller and book maker
+    # show list of unverified booksellers and bookmakers to the admin
+    # give the option to verify users
+    #
