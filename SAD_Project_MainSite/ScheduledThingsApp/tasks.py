@@ -53,6 +53,7 @@ import requests
 import time
 import smtplib
 from email.mime.text import MIMEText
+import datetime
 @app.task
 def test():
     print("Daily task is started")
@@ -67,26 +68,28 @@ def test():
         return
 
     json = req.json()
+    todayDate = datetime.datetime.now().strftime('%Y-%m-%d')
 
     for x in range(len(json)):
-        print(json[x]['birth_date'])
-        msg = MIMEText("Dear "+json[x]['name']+json[x]['last_name']+"\n"+
-                       "tavalodet mobarak \n"
-                       "ZELIG TEAM")
-        msg['Subject'] = 'Happy Birth Day '+json[x]['name']
-        msg['From'] = 'sina@zelig.com'
-        msg['To'] = 'yourmail@biNam.com'
+        if todayDate == json[x]['birth_date']:
+            msg = MIMEText("Dear "+json[x]['name']+" "+json[x]['last_name']+"\n"+
+                           "tavalodet mobarak \n\n"
+                           "ZELIG TEAM")
+            msg['Subject'] = 'Happy Birth Day '+json[x]['name']
+            msg['From'] = 'sina@zelig.com'
+            msg['To'] = 'yourmail@biNam.com'
 
-        # SENDING MAIL FORMAT FOR ONLINE SMTP SERVER
-        # server = smtplib.SMTP(smtpserver)
-        # server.starttls()
-        # server.login(login,password)
-        # problems = server.sendmail(from_addr, to_addr_list, message)
-        # server.quit()
+            # SENDING MAIL FORMAT FOR ONLINE SMTP SERVER
+            # server = smtplib.SMTP(smtpserver)
+            # server.starttls()
+            # server.login(login,password)
+            # problems = server.sendmail(from_addr, to_addr_list, message)
+            # server.quit()
 
-        try:
-            s = smtplib.SMTP('localhost:10000')
-            s.sendmail(msg['From'], msg['To'], msg.as_string())
-            s.quit()
-        except:
-            print("Mail Server is down")
+            try:
+                s = smtplib.SMTP('localhost:10000')
+                s.sendmail(msg['From'], msg['To'], msg.as_string())
+                s.quit()
+                print("Tabrik msg was sent to "+json[x]['name'])
+            except:
+                print("Mail Server is down")
