@@ -58,6 +58,8 @@ app.conf.timezone = 'UTC'
 
 import requests
 import time
+import smtplib
+from email.mime.text import MIMEText
 @app.task
 def test():
     print("Daily task is started")
@@ -71,10 +73,18 @@ def test():
         # test()
         return
 
-    print(req.json())
+    json = req.json()
 
+    for x in range(len(json)):
+        print(json[x]['birth_date'])
+        msg = MIMEText("tavalodet mobarak")
+        msg['Subject'] = 'tabrik e tavalod'+json[x]['name']
+        msg['From'] = 'myMail@sinaCO.com'
+        msg['To'] = 'yourmail@biNam.com'
 
-
+        s = smtplib.SMTP('localhost')
+        s.sendmail(msg['From'], msg['To'], msg.as_string())
+        s.quit()
 
 
 # Way3
