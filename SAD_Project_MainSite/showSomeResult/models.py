@@ -31,7 +31,6 @@ class motarjem(models.Model):
         return self.name
 
 
-
 ########################################################################
 #############These lines are added by hamid#############################
 

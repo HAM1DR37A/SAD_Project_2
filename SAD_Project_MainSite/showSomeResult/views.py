@@ -10,18 +10,17 @@ from .models import TopGenre, motarjem
 def guide(request):
     return HttpResponse("use like this:<br>"
                         "http://127.0.0.1:8000/searchSTH/topGenre/"
-                        "<br>OR<br>"
-                        "http://127.0.0.1:8000/searchSTH/tarjomeList/")
+                        "<br>OR<br>")
 
 
-def showTopGenre(request):
+def show_top_genre(request):
     top_genre_list = TopGenre.objects.all()
     output = ', '.join([q.name for q in top_genre_list])
     return HttpResponse(output)
 
 
 #     TODO hamid bas request.getbody bezane, vase inke betoone ba in adad ha kar kone
-def gettingNewBuyRequest(request, buyedItems):
+def getting_new_buy_request(request, buyedItems):
     # age taraf iedoone kharid kone, shansesh ro ba adad e 13 check mikonim :)) age biare %10 migire
     buyedItems = int(buyedItems)
     if buyedItems == 1:
@@ -68,10 +67,8 @@ def search(request):
                     else:
                         temp = TranslationRequest.objects.filter(source_lang=langID)
 
-
-
                 for i in range(len(temp)):
-                    test  = {'bookName': temp[i], 'reqID': temp[i].translation_request_id }
+                    test = {'bookName': temp[i], 'reqID': temp[i].translation_request_id }
                     answer.append(test)
 
             return render(request,'showSomeResult/SearchPageOfTarjomeList.html',{'bookList':answer})
@@ -81,16 +78,16 @@ def search(request):
     return render(request, 'showSomeResult/SearchPageOfTarjomeList.html',{'form': form})
 
 
-
 # THIS IS NOTIF TEST PAGE
 def notif(request):
     return render(request, 'showSomeResult/NotifTemplate.html')
+
 
 # THIS IS FOR RESPONSE TO NOTIF REQUESTS
 from .models import BookMaker, Notification
 from django.http import JsonResponse
 from django.core import serializers
-def responseToNotifJava(request, userID):
+def response_to_notif_java(request, userID):
     user = BookMaker.objects.get(book_maker_id=userID) #TODO in khat fln ke ezafii be nazar mirese, kolan model ha kheili irad darand :|
     notifs = list(Notification.objects.filter(BookMaker_id=user.book_maker_id))
     posts_serialized = serializers.serialize('json', notifs)
@@ -106,7 +103,7 @@ def hamidpart(request,motarjemID,requestID):
 
 
 from .models import BookMaker, Notification
-def deleteNotif(request, userID, notifPK):
+def delete_notification(request, userID, notifPK):
     # vase in ino gozashtim ke aval check beshe ke aia intour user ii darim ia na
     userOBJ = BookMaker.objects.get(book_maker_id=userID)
     notifOBJ = Notification.objects.get(pk=notifPK)
@@ -119,9 +116,8 @@ def deleteNotif(request, userID, notifPK):
 
 # TODO baiad saiere user ha ro ham handle koni
 from django.http import Http404
-import json
 from .models import BookMaker
-def getBirthsOfUsers(request, secretKey):
+def get_births_of_users(request, secretKey):
     if secretKey == "justShowMeTheBirthDay":
         answer = list()
         allUsers = BookMaker.objects.all().values('name', 'last_name', 'birth_date')
