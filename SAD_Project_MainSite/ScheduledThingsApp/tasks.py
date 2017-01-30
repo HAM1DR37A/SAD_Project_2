@@ -45,14 +45,7 @@ def setup_periodic_tasks(sender, **kwargs):
         crontab(hour=7, minute=30, day_of_week=1),
         test.s(),
     )
-# Way 2
-# app.conf.beat_schedule = {
-#     'add-every-10-seconds': {
-#         'task': 'tasks.test',
-#         'schedule': 10.0,
-#         'args': ('h')
-#     },
-# }
+
 app.conf.timezone = 'UTC'
 
 
@@ -77,21 +70,23 @@ def test():
 
     for x in range(len(json)):
         print(json[x]['birth_date'])
-        msg = MIMEText("tavalodet mobarak")
-        msg['Subject'] = 'tabrik e tavalod'+json[x]['name']
-        msg['From'] = 'myMail@sinaCO.com'
+        msg = MIMEText("Dear "+json[x]['name']+json[x]['last_name']+"\n"+
+                       "tavalodet mobarak \n"
+                       "ZELIG TEAM")
+        msg['Subject'] = 'Happy Birth Day '+json[x]['name']
+        msg['From'] = 'sina@zelig.com'
         msg['To'] = 'yourmail@biNam.com'
 
-        s = smtplib.SMTP('localhost')
-        s.sendmail(msg['From'], msg['To'], msg.as_string())
-        s.quit()
+        # SENDING MAIL FORMAT FOR ONLINE SMTP SERVER
+        # server = smtplib.SMTP(smtpserver)
+        # server.starttls()
+        # server.login(login,password)
+        # problems = server.sendmail(from_addr, to_addr_list, message)
+        # server.quit()
 
-
-# Way3
-# myapp/tasks.py
-# import datetime
-# import celery
-#
-# @celery.decorators.periodic_task(run_every=datetime.timedelta(minutes=5))
-# def myfunc():
-#     print ('periodic_task')
+        try:
+            s = smtplib.SMTP('localhost:10000')
+            s.sendmail(msg['From'], msg['To'], msg.as_string())
+            s.quit()
+        except:
+            print("Mail Server is down")
