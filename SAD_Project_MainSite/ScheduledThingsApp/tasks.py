@@ -34,15 +34,12 @@ app = Celery('tasks', backend='rpc://', broker='amqp://localhost')
 # Way 1
 @app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
-    # Calls test('hello') every 10 seconds.
+    # Calls test() every 10 seconds ==> just for testing
     sender.add_periodic_task(10.0, test.s(), name='add every 10')
 
-    # Calls test('world') every 30 seconds
-    sender.add_periodic_task(30.0, test.s(), expires=10)
-
-    # Executes every Monday morning at 7:30 a.m.
+    # Executes every morning at 7:30 a.m.
     sender.add_periodic_task(
-        crontab(hour=7, minute=30, day_of_week=1),
+        crontab(hour=7, minute=30),
         test.s(),
     )
 

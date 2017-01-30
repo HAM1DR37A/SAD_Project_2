@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.http import HttpResponse
-from .models import TopGenre, BookForTarjome, motarjem
+from .models import TopGenre, motarjem
 
 
 def guide(request):
@@ -20,12 +20,6 @@ def showTopGenre(request):
     return HttpResponse(output)
 
 
-def TarjomeList(request):
-    list = BookForTarjome.objects.all()
-    output = ', '.join([q.name for q in list])
-    return HttpResponse(output)
-
-
 #     TODO hamid bas request.getbody bezane, vase inke betoone ba in adad ha kar kone
 def gettingNewBuyRequest(request, buyedItems):
     # age taraf iedoone kharid kone, shansesh ro ba adad e 13 check mikonim :)) age biare %10 migire
@@ -38,18 +32,6 @@ def gettingNewBuyRequest(request, buyedItems):
         return HttpResponse('7')
     if 10 <= buyedItems:
         return HttpResponse('10')
-
-
-def getNewTarjomeReq(request, book_id):
-    bookName = BookForTarjome.objects.get(id=book_id).__str__()
-    booklang = BookForTarjome.objects.get(id=book_id).lang
-    motarjems = motarjem.objects.filter(desiredLang=booklang)
-    for x in motarjems:
-        x.notification = "got this for you to translate ==> "+str(bookName)+"  go to search tab and " \
-                                                                            "search for this id:"+str(book_id)
-        x.save()
-    output = '<br> '.join(["user:"+q.name+"||notif:"+q.notification for q in motarjems])
-    return HttpResponse(output)
 
 
 def bootiTest(request):

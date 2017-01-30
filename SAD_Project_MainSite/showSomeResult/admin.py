@@ -1,10 +1,9 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import TopGenre, BookForTarjome, motarjem
+from .models import TopGenre, motarjem
 
 # admin.site.register(TopGenre)
-admin.site.register(BookForTarjome)
 # admin.site.register(motarjem)
 
 ########################
