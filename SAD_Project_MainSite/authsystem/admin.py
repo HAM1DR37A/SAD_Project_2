@@ -1,9 +1,11 @@
 from django.contrib import admin
+from django.contrib.auth.models import User
 from .models import BookReaderUser, Book, BookAndBookPackage, BookMaker, OrganizationFinancialAccount,\
     ShoppingCart, Language, Admin, BookSeller, SellBy, FinancialAccount, BookMakerLanguage, Write, Order, \
     BookShoppingCart, PreOrder, BookRating, BookMakerRating, TranslationRequest, Income, Expense, BookPackage, \
     BookComment, CommentReply
 # Register your models here.
+# admin.site.register(User)
 admin.site.register(BookReaderUser),
 admin.site.register(Book),
 admin.site.register(BookAndBookPackage),

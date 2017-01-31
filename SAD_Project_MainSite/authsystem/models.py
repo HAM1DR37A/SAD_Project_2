@@ -33,12 +33,10 @@ class Admin(models.Model):
     django_user = models.OneToOneField(User, null=False)
     name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
-    admin_id = models.IntegerField(primary_key=True, auto_created=True)
 
 
 class Book(models.Model):
     title = models.CharField(max_length=40, null=False)
-    book_id = models.CharField(max_length=10, primary_key=True, auto_created=True)
     first_publish_year = models.IntegerField(null=False)
     isbn = models.CharField(max_length=20, null=False, unique=True)
     number_of_pages = models.IntegerField()
@@ -66,7 +64,6 @@ class GenreBook(models.Model):
 
 class BookSeller(models.Model):
     django_user = models.OneToOneField(User, null=False)
-    book_seller_id = models.CharField(max_length=15, auto_created=True, primary_key=True)
     avatar = models.ImageField(null=False, default='user.png')
     telephone_no = models.CharField(max_length=15)
     address = models.CharField(max_length=150, null=False)
@@ -100,12 +97,15 @@ class BookMaker(models.Model):
     )
     django_user = models.OneToOneField(User, null=False)
     birth_date = models.DateField()
-    gender = models.CharField(max_length=2, choices=gender_choices)
-    book_maker_type = models.CharField(max_length=4, choices=type_choices)
+    gender = models.CharField(max_length=2, choices=gender_choices, null=False)
+    book_maker_type = models.CharField(max_length=4, choices=type_choices, null=False)
     is_verified = models.BooleanField(default=False)
     avatar = models.ImageField(null=False, default='user.png')
     telephone_no = models.CharField(max_length=15)
     address = models.CharField(max_length=150, null=False)
+
+    # def __str__(self):
+    #     return str(self.book_maker_id)
 
 
 class FinancialAccount(models.Model):
@@ -134,7 +134,6 @@ class Write(models.Model):
 class Order(models.Model):
     delivery_date = models.DateField()
     order_date = models.DateField()
-    order_id = models.IntegerField(primary_key=True, auto_created=True)
     shopping_cart_id = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE)
 
 
@@ -172,7 +171,6 @@ class BookMakerRating(models.Model):
 class TranslationRequest(models.Model):
     book_file = models.FileField()
     source_lang = models.ForeignKey(Language,null=False)
-    translation_request_id = models.IntegerField(primary_key=True, auto_created=True)
     user_id = models.ForeignKey(BookReaderUser, on_delete=models.PROTECT)
     book_maker_id = models.ForeignKey(BookMaker, on_delete=models.PROTECT, null=True)
     register_date = models.DateField()
@@ -181,7 +179,6 @@ class TranslationRequest(models.Model):
 
 
 class Income(models.Model):
-    income_id = models.IntegerField(primary_key=True, auto_created=True)
     user_id = models.ForeignKey(BookReaderUser, on_delete=models.PROTECT, null=True)
     amount = models.FloatField()
     date = models.DateField()
@@ -190,7 +187,6 @@ class Income(models.Model):
 
 
 class Expense(models.Model):
-    expense_id = models.IntegerField(primary_key=True, auto_created=True)
     destination = models.ForeignKey(FinancialAccount)
     organization_financial_account = models.ForeignKey(OrganizationFinancialAccount, on_delete=models.PROTECT)
     amount = models.FloatField()
@@ -198,7 +194,6 @@ class Expense(models.Model):
 
 
 class BookPackage(models.Model):
-    package_id = models.IntegerField(primary_key=True, auto_created=True)
     name = models.TextField()
     price = models.FloatField()
 
@@ -212,7 +207,6 @@ class BookAndBookPackage(models.Model):
 
 
 class BookComment(models.Model):
-    book_comment_id = models.IntegerField(primary_key=True, auto_created=True)
     content = models.TextField()
     user_id = models.ForeignKey(BookReaderUser)
     book_id = models.ForeignKey(Book)
@@ -220,14 +214,12 @@ class BookComment(models.Model):
 
 
 class CommentReply(models.Model):
-    reply_comment_id = models.IntegerField(primary_key=True, auto_created=True)
     book_comment_id = models.ForeignKey(BookComment)
     user_id = models.ForeignKey(BookReaderUser)  # id of the person who wrote reply
     content = models.TextField()
 
 
 class Notification(models.Model):
-    notif_id = models.IntegerField(primary_key=True)
     content = models.TextField(null=False)
     notif_date_created = models.DateField(null=False)
     BookMaker_id = models.ForeignKey(BookMaker, null=False, on_delete=models.CASCADE)
