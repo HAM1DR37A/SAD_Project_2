@@ -154,6 +154,10 @@ class PreOrder(models.Model):
     # author can be retrieved by access to Write table
     book_id = models.ForeignKey(Book, on_delete=models.PROTECT)
     user_name = models.ForeignKey(BookReaderUser, on_delete=models.PROTECT)
+    quantity = models.IntegerField(null=False, default=1)
+
+    class Meta:
+        unique_together = ('book_id', 'user_name')
 
 
 class BookRating(models.Model):
