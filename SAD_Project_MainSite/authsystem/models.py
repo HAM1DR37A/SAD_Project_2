@@ -14,6 +14,10 @@ class BookReaderUser(models.Model):
     avatar = models.ImageField(null=False, default='user.png')
     telephone_no = models.CharField(max_length=15)
     address = models.CharField(max_length=150, null=True)
+    birth_date = models.DateField()
+
+    def __str__(self):
+        return str(self.id)
 
 
 class OrganizationFinancialAccount(models.Model):
@@ -21,7 +25,6 @@ class OrganizationFinancialAccount(models.Model):
 
 
 class ShoppingCart(models.Model):
-    shopping_cart_id = models.IntegerField(primary_key=True, auto_created=True)
     user_id = models.ForeignKey(BookReaderUser)
 
 
@@ -68,6 +71,7 @@ class BookSeller(models.Model):
     telephone_no = models.CharField(max_length=15)
     address = models.CharField(max_length=150, null=False)
     is_verified = models.BooleanField(default=False)
+    birth_date = models.DateField()
 
 
 class SellBy(models.Model):
@@ -104,8 +108,8 @@ class BookMaker(models.Model):
     telephone_no = models.CharField(max_length=15)
     address = models.CharField(max_length=150, null=False)
 
-    # def __str__(self):
-    #     return str(self.book_maker_id)
+    def __str__(self):
+        return str(self.id)
 
 
 class FinancialAccount(models.Model):
@@ -132,8 +136,8 @@ class Write(models.Model):
 
 
 class Order(models.Model):
-    delivery_date = models.DateField()
-    order_date = models.DateField()
+    delivery_date = models.DateTimeField(null=True)
+    order_date = models.DateTimeField(default=timezone.now())
     shopping_cart_id = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE)
 
 
@@ -170,6 +174,7 @@ class BookMakerRating(models.Model):
 
 class TranslationRequest(models.Model):
     book_file = models.FileField()
+    book_name = models.CharField(max_length=50, null=False)
     source_lang = models.ForeignKey(Language,null=False)
     user_id = models.ForeignKey(BookReaderUser, on_delete=models.PROTECT)
     book_maker_id = models.ForeignKey(BookMaker, on_delete=models.PROTECT, null=True)
