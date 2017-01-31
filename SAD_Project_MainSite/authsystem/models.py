@@ -73,6 +73,10 @@ class BookSeller(models.Model):
     is_verified = models.BooleanField(default=False)
     birth_date = models.DateField()
 
+    def __str__(self):
+        return str(self.id)
+
+
 
 class SellBy(models.Model):
     price = models.FloatField(null= False)

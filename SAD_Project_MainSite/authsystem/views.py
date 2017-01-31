@@ -114,7 +114,6 @@ def get_unverified_users(request):
     # show list of unverified booksellers and bookmakers to the admin
     # give the option to verify users
 
-
 # use this method to show admin, a list of undelivered orders
 @csrf_exempt
 def get_undelivered_orders(request):
@@ -123,6 +122,7 @@ def get_undelivered_orders(request):
         for element in unverified_orders:
             print(element)
         return unverified_orders
+
 
 # use this method to set the delivery date of an order, thus verify that order is delivered
 @csrf_exempt
