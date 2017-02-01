@@ -163,6 +163,25 @@ def admin_page(request):
     return render_to_response('admin_page.html', output)
 
 
+# def accept(request, groupid, userid):
+#     group = Group.objects.get(id=groupid)
+#     user = User.objects.get(user__user__id=userid)
+#     req = UserGroupRequest.objects.get(groupId=group, userId=user)
+#     UserGroupRequest.delete(req)
+#     userassign = UserGroupAssignment.objects.create(groupId=group, userId= user)
+#     # userassign.save()
+#     return redirect("/profile")
+#
+#
+# def reject(request, groupid, userid):
+#     print(groupid, userid)
+#     group = Group.objects.get(id=groupid)
+#     user = User.objects.get(user__user__id=userid)
+#     req = UserGroupRequest.objects.get(groupId=group, userId=user)
+#     UserGroupRequest.delete(req)
+#     return redirect("/profile")
+
+
 def logout_user(request):
     logout(request)
     return redirect("/")

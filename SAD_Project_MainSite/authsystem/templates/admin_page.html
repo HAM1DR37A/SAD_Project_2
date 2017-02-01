@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>admin page</title>
     <link rel="stylesheet" type="text/css" href="{% static "admin_page.css" %}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="{%  static "angular.min.js" %}" type="text/javascript"></script>
     <script src="{%  static "admin_page.js" %}" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -14,18 +15,44 @@
     <div class="row">
         <div class="col-md-4" style="border: solid black 1px; padding-top: 5px;">
             <div>
-                {% if unverified_book_sellers_count != 0 %}
-                    <div class="header">
+                {% if unverified_book_makers_count != 0 %}
+                    <div class="header rtl title1" >
   درخواست های ثبت نام کتاب سازان
                     </div>
-                    {% for req in unverified_book_sellers %}
+                    {% for req in unverified_book_makers %}
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <div class="media-left media-middle">
-                                    <img class="media-object" style="max-height: 60px; max-width: 60px;" src="{{ req.userId.avatar.url }}" alt="...">
-                                </div>
+{#                                <div class="media-left media-middle">#}
+{#                                    <img class="media-object" style="max-height: 60px; max-width: 60px;" src="{{ req.userId.avatar.url }}" alt="...">#}
+{#                                </div>#}
                                 <div class="media-body">
-                                    {{ req.userId }} wants to join {{ req.groupId }}
+                                    <p class="rtl">
+                                        نام :{{ req.django_user.first_name }}
+                                    </p>
+                                    <p class="rtl">
+                                        نام خانوادگی :{{ req.django_user.last_name }}
+                                    </p>
+                                    <p class="rtl">
+                                        رایانامه :{{ req.django_user.email }}
+                                    </p>
+                                    <p class="rtl">
+                                        جنسیت :{{ req.gender }}
+                                    </p>
+                                    <p class="rtl">
+                                        شماره تلفن :{{ req.telephone_no }}
+                                    </p>
+                                    <p class="rtl">
+                                        آدرس :{{ req.address }}
+                                    </p>
+                                    <p class="rtl">
+                                        تاریخ تولد :{{ req.birth_date_day }} {{ req.birth_date_month }} {{ req.birth_date_year }}
+                                    </p>
+                                    <p class="rtl">
+                                        نوع :{{ req.book_maker_type }}
+                                    </p>
+                                    <p class="rtl">
+                                        نام کاربری :{{ req.django_user.username }}
+                                    </p>
                                 </div>
                             </div>
                             <div class="panel-body">
@@ -43,48 +70,48 @@
                         </div>
                     {% endfor %}
                 {% else %}
-                    <p>
+                    <p class="rtl">
                         درخواست ثبت نام از هیچ کتاب سازی موجود نیست
                     </p>
                 {% endif %}
             </div>
         </div>
         <div class="col-md-4" style="border: solid black 1px; padding-top: 5px;">
-            <div>
-                {% if unverified_book_sellers_count != 0 %}
-                    <div class="header">
-  درخواست های ثبت نام کتاب فروشان
-                    </div>
-                    {% for req in unverified_book_sellers %}
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <div class="media-left media-middle">
-                                    <img class="media-object" style="max-height: 60px; max-width: 60px;" src="{{ req.userId.avatar.url }}" alt="...">
-                                </div>
-                                <div class="media-body">
-                                    {{ req.userId }} wants to join {{ req.groupId }}
-                                </div>
-                            </div>
-                            <div class="panel-body">
-                                <nav>
-                                    <ul class="pager">
-                                        <li><a href="/accept/{{ req.groupId.id }}/{{ req.userId.user.id }}/">
-                                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                                        </a></li>
-                                        <li><a href="/reject/{{ req.groupId.id }}/{{ req.userId.user.id }}/">
-                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                        </a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <p>
-                        درخواست ثبت نام از هیچ کتاب فروشی موجود نیست
-                    </p>
-                {% endif %}
-            </div>
+{#            <div>#}
+{#                {% if unverified_book_sellers_count != 0 %}#}
+{#                    <div class="header">#}
+{#  درخواست های ثبت نام کتاب فروشان#}
+{#                    </div>#}
+{#                    {% for req in unverified_book_sellers %}#}
+{#                        <div class="panel panel-default">#}
+{#                            <div class="panel-heading">#}
+{#                                <div class="media-left media-middle">#}
+{#                                    <img class="media-object" style="max-height: 60px; max-width: 60px;" src="{{ req.userId.avatar.url }}" alt="...">#}
+{#                                </div>#}
+{#                                <div class="media-body">#}
+{#                                    {{ req.userId }} wants to join {{ req.groupId }}#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="panel-body">#}
+{#                                <nav>#}
+{#                                    <ul class="pager">#}
+{#                                        <li><a href="/accept/{{ req.groupId.id }}/{{ req.userId.user.id }}/">#}
+{#                                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>#}
+{#                                        </a></li>#}
+{#                                        <li><a href="/reject/{{ req.groupId.id }}/{{ req.userId.user.id }}/">#}
+{#                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>#}
+{#                                        </a></li>#}
+{#                                    </ul>#}
+{#                                </nav>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    {% endfor %}#}
+{#                {% else %}#}
+{#                    <p>#}
+{#                        درخواست ثبت نام از هیچ کتاب فروشی موجود نیست#}
+{#                    </p>#}
+{#                {% endif %}#}
+{#            </div>#}
         </div>
         <div class="col-md-4" style="border: solid black 1px; padding-top: 5px;">
 
