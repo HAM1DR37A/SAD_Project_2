@@ -141,3 +141,31 @@ def deliver_order(request):
         except ObjectDoesNotExist:
             print("requested Order Does not Exists!")
 
+
+def logout_user(request):
+    logout(request)
+    return redirect("/")
+
+
+@csrf_exempt
+def login_user(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        print(username)
+        password = request.POST.get('password')
+        print(password)
+        user = authenticate(username=username, password=password)
+        print(user)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                # this should redirect user to his homepage, based on the type of user he is
+                return redirect("/")
+            else:
+                return render(request, 'user_not_active.html')
+
+        else:
+
+            return render(request, 'invalid.html')
+    else:
+        return render(request, 'login.html')
