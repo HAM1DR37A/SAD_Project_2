@@ -155,7 +155,6 @@ def login_user(request):
         password = request.POST.get('password')
         print(password)
         user = authenticate(username=username, password=password)
-        print(user)
         if user is not None:
             if user.is_active:
                 login(request, user)
@@ -165,7 +164,7 @@ def login_user(request):
                 return render(request, 'user_not_active.html')
 
         else:
-
             return render(request, 'invalid.html')
-    else:
+
+    if request.method == "GET":
         return render(request, 'login.html')
