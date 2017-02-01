@@ -16,13 +16,13 @@ def book_reader_signup(request):
     if request.method == "GET":
         return render(request, 'bookreadersignup.html')
     if request.method == "POST":
-        print(request.POST)
-
         post_dict = dict(six.iterlists(request.POST))
         jso = json.loads(post_dict['command'][0])
         d_user = User.objects.create(username=jso['username'] , password=jso['password'] ,
                                      first_name=jso['first_name'] ,last_name=jso['last_name'] , email=jso['email'])
-        user = BookReaderUser.objects.create(django_user=d_user,address=jso['address'], telephone_no=jso['tel_no'], birth_date='1999-01-25')
+        user = BookReaderUser.objects.create(django_user=d_user,address=jso['address'], telephone_no=jso['tel_no'],
+                                             birth_date_day=jso['day'], birth_date_month=jso['month'],
+                                             birth_date_year=jso['year'])
         user.save()
         return redirect("/admin")
 
@@ -32,8 +32,6 @@ def book_maker_signup(request):
     if request.method == "GET":
         return render(request, 'bookmakersignup.html')
     if request.method == "POST":
-        print(request.POST)
-
         post_dict = dict(six.iterlists(request.POST))
         jso = json.loads(post_dict['command'][0])
         d_user = User.objects.create(username=jso['username'], password=jso['password'], first_name=jso['first_name'],
@@ -50,8 +48,6 @@ def book_seller_signup(request):
     if request.method == "GET":
         return render(request, 'booksellersignup.html')
     if request.method == "POST":
-        print(request.POST)
-
         post_dict = dict(six.iterlists(request.POST))
         jso = json.loads(post_dict['command'][0])
         d_user = User.objects.create(username=jso['username'], password=jso['password'], first_name=jso['first_name'],
@@ -116,11 +112,17 @@ def get_unverified_users(request):
     # show list of unverified booksellers and bookmakers to the admin
     # give the option to verify users
 
+
 # use this method to show admin, a list of undelivered orders
 @csrf_exempt
 def get_undelivered_orders(request):
     if request.method == "GET":
         unverified_orders = Order.objects.filter(delivery_date=None)
+        output = {
+            'unverified_orders': unverified_orders,
+            'unverified_orders_count': unverified_orders.count(),
+        }
+
         for element in unverified_orders:
             print(element)
         return unverified_orders
@@ -158,3 +160,31 @@ def admin_page(request):
     print(output['unverified_book_sellers'])
     print(output['unverified_book_sellers_count'])
     return render_to_response('admin_page.html', output)
+
+
+def logout_user(request):
+    logout(request)
+    return redirect("/")
+
+
+@csrf_exempt
+def login_user(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        print(username)
+        password = request.POST.get('password')
+        print(password)
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                # this should redirect user to his homepage, based on the type of user he is
+                return redirect("/")
+            else:
+                return render(request, 'user_not_active.html')
+
+        else:
+            return render(request, 'invalid.html')
+
+    if request.method == "GET":
+        return render(request, 'login.html')

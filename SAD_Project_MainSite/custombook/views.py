@@ -87,5 +87,5 @@ def translate_a_book(request):
             translator = BookMaker.objects.filter(django_user=request.user)
         else:
             print('Anonymous User Error!')
-        if len(user) < 1:
+        if len(translator) < 1:
             print("invalid User!")
