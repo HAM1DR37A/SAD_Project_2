@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils import six, timezone
 from django.http import *
 
+
 # TODO need to check user's authority in all methods
 @csrf_exempt
 def book_reader_signup(request):
@@ -18,9 +19,9 @@ def book_reader_signup(request):
     if request.method == "POST":
         post_dict = dict(six.iterlists(request.POST))
         jso = json.loads(post_dict['command'][0])
-        d_user = User.objects.create(username=jso['username'] , password=jso['password'] ,
-                                     first_name=jso['first_name'] ,last_name=jso['last_name'] , email=jso['email'])
-        user = BookReaderUser.objects.create(django_user=d_user,address=jso['address'], telephone_no=jso['tel_no'],
+        d_user = User.objects.create(username=jso['username'], password=jso['password'] ,
+                                     first_name=jso['first_name'],last_name=jso['last_name'], email=jso['email'])
+        user = BookReaderUser.objects.create(django_user=d_user, address=jso['address'], telephone_no=jso['tel_no'],
                                              birth_date_day=jso['day'], birth_date_month=jso['month'],
                                              birth_date_year=jso['year'])
         user.save()
