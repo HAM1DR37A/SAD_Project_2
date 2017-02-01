@@ -10,7 +10,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils import six, timezone
 from django.http import *
 
-
 # TODO need to check user's authority in all methods
 @csrf_exempt
 def book_reader_signup(request):
@@ -21,10 +20,9 @@ def book_reader_signup(request):
 
         post_dict = dict(six.iterlists(request.POST))
         jso = json.loads(post_dict['command'][0])
-        print(jso['first_name'])
         d_user = User.objects.create(username=jso['username'] , password=jso['password'] ,
                                      first_name=jso['first_name'] ,last_name=jso['last_name'] , email=jso['email'])
-        user = BookReaderUser.objects.create(django_user=d_user,address=jso['address'], telephone_no=jso['tel_no'])
+        user = BookReaderUser.objects.create(django_user=d_user,address=jso['address'], telephone_no=jso['tel_no'], birth_date='1999-01-25')
         user.save()
 
 
@@ -115,7 +113,6 @@ def get_unverified_users(request):
     # show list of unverified booksellers and bookmakers to the admin
     # give the option to verify users
 
-
 # use this method to show admin, a list of undelivered orders
 @csrf_exempt
 def get_undelivered_orders(request):
@@ -144,29 +141,17 @@ def deliver_order(request):
             print("requested Order Does not Exists!")
 
 
-def logout_user(request):
-    logout(request)
-    return redirect("/")
-
-
 @csrf_exempt
-def login_user(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        print(username)
-        password = request.POST.get('password')
-        print(password)
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                # this should redirect user to his homepage, based on the type of user he is
-                return redirect("/")
-            else:
-                return render(request, 'user_not_active.html')
+def admin_page(request):
+    output = {
+        'unverified_book_makers' : BookMaker.objects.filter(is_verified=False),
+        'unverified_book_makers_count': BookMaker.objects.filter(is_verified=False).count(),
+        'unverified_book_sellers' : BookSeller.objects.filter(is_verified=False),
+        'unverified_book_sellers_count' : BookSeller.objects.filter(is_verified=False).count()
+    }
 
-        else:
-            return render(request, 'invalid.html')
-
-    if request.method == "GET":
-        return render(request, 'login.html')
+    print(output['unverified_book_makers'])
+    print(output['unverified_book_makers_count'])
+    print(output['unverified_book_sellers'])
+    print(output['unverified_book_sellers_count'])
+    return render_to_response('admin_page.html', output)

@@ -6,10 +6,16 @@
     <title>sign up</title>
     <link rel="stylesheet" type="text/css" href="{% static "bookmakersignup.css" %}" />
     <script src="{%  static "angular.min.js" %}" type="text/javascript"></script>
-    <script src="{%  static "signup.js" %}" type="text/javascript"></script>
+    <script src="{%  static "bookmakersignup.js" %}" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
-<body ng-app="signupapp" ng-controller="signupcontroller">
+<body ng-app="bookmakersignupapp" ng-controller="bookmakersignupcontroller">
+
+    <ul>
+        <li><a href="/book_reader_signup">کتاب خوان</a></li>
+        <li class="active"><a href="/book_maker_signup">کتاب ساز</a></li>
+        <li><a href="/book_seller_signup">کتاب فروش</a></li>
+    </ul>
 
     <div id="login-box">
   <div class="left ">
@@ -19,6 +25,22 @@
       <input ng-model="first_name" type="text" placeholder="نام" />
       <input ng-model="last_name" type="text" placeholder="نام خانوادگی" />
       <input ng-model="tel_no" type="tel" placeholder="شماره تلفن" />
+      <input ng-model="email" type="email" placeholder="رایانامه" />
+      <div class="select-style">
+          <select ng-model="gender" ng-options="o for o in options" ></select>
+      </div>
+      <div class="select-style">
+          <select ng-model="type" ng-options="o for o in types" ></select>
+      </div>
+      <div class="select-style">
+          <select ng-model="day" ng-options="o for o in days" ></select>
+      </div>
+      <div class="select-style">
+          <select ng-model="month" ng-options="o for o in months" ></select>
+      </div>
+      <div class="select-style">
+          <select ng-model="year" ng-options="o for o in years" ></select>
+      </div>
       <input ng-model="email" type="email" placeholder="رایانامه" />
       <input ng-model="username" type="text" placeholder="نام کاربری" />
       <input ng-model="password" type="password" placeholder="گذرواژه" />

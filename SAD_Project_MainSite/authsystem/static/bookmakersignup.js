@@ -1,12 +1,22 @@
 /**
- * Created by saeid on 1/3/2017.
+ * Created by saeid on 2/1/2017.
  */
 
-var app = angular.module('signupapp',[]);
+var app = angular.module('bookmakersignupapp',[]);
 
-app.controller('signupcontroller', function ($scope, $http, $window) {
+app.controller('bookmakersignupcontroller', function ($scope, $http, $window) {
     $scope.signup_response={};
     $scope.status = true;
+    $scope.options = ['مرد', 'زن'];
+    $scope.gender = $scope.options[0];
+    $scope.days = ['۱', '۲'];
+    $scope.day = $scope.days[0];
+    $scope.months = ['فروردین', 'اردیبهشت'];
+    $scope.month = $scope.months[0];
+    $scope.years = ['۱۳۷۲', '۱۳۷۳'];
+    $scope.year = $scope.years[0];
+    $scope.types = ['نویسنده' , 'مولف'];
+    $scope.type = $scope.types[0];
     $scope.send = function () {
         $scope.user = new Object();
         $scope.user.username = $scope.username;
@@ -17,6 +27,11 @@ app.controller('signupcontroller', function ($scope, $http, $window) {
         $scope.user.last_name = $scope.last_name;
         $scope.user.tel_no = $scope.tel_no;
         $scope.user.address = $scope.address;
+        $scope.user.gender = $scope.gender;
+        $scope.user.type = $scope.type;
+        $scope.user.day = $scope.day;
+        $scope.user.month = $scope.month;
+        $scope.user.year = $scope.year;
 
         if($scope.r_password != $scope.password)
         {

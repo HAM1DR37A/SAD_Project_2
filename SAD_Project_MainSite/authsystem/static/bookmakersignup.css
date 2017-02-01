@@ -3,6 +3,73 @@
   outline: none;
 }
 
+ul {
+  position: absolute;
+    list-style-type: none;
+    left: 34%;
+}
+
+li {
+  height: 25px;
+  float: left;
+  margin-right: 0px;
+  border-right: 1px solid #aaa;
+  padding: 0 20px;
+}
+
+li:last-child {
+  border-right: none;
+}
+
+li a {
+  text-decoration: none;
+  color: #827d7d;
+  font: 25px/1 Helvetica, Verdana, sans-serif;
+  text-transform: uppercase;
+  -webkit-transition: all 0.5s ease;
+}
+
+li a:hover {
+  color: #666;
+}
+
+li.active a {
+  font-weight: bold;
+  color: #333;
+}
+
+.select-style {
+    z-index: 100;
+    overflow: hidden;
+    display: block;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    width: 220px;
+    height: 32px;
+    border: none;
+    border-bottom: 1px solid #AAA;
+    direction: rtl;
+}
+
+.select-style select {
+  font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    transition: 0.2s ease;
+    color: #bababa;
+    padding: 5px 4px;
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+}
+
+.select-style select:focus {
+    outline: none;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -14,13 +81,15 @@ body {
 }
 
 #login-box {
-  position: relative;
-  margin: 5% auto;
-  width: 300px;
-  height: 750px;
-  background: #FFF;
-  border-radius: 2px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  position: absolute;
+    left: 40%;
+    top: 1%;
+    margin: 5% auto;
+    width: 300px;
+    height: 1050px;
+    background: #FFF;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .left {
