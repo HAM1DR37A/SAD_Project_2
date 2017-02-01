@@ -42,7 +42,7 @@ app.controller('bookmakersignupcontroller', function ($scope, $http, $window) {
 
         json_command = JSON.stringify($scope.user);
             $.post( "./", { command : json_command }, function( data ) {
-
+                $window.location.href = "/admin";
             });
 
     }

@@ -24,7 +24,7 @@ def book_reader_signup(request):
                                      first_name=jso['first_name'] ,last_name=jso['last_name'] , email=jso['email'])
         user = BookReaderUser.objects.create(django_user=d_user,address=jso['address'], telephone_no=jso['tel_no'], birth_date='1999-01-25')
         user.save()
-        return redirect('/admin/')
+        return redirect("/admin")
 
 
 @csrf_exempt
@@ -42,7 +42,7 @@ def book_maker_signup(request):
                                         telephone_no=jso['tel_no'],address=jso['address'],
                                         book_maker_type=jso['book_maker_type'], gender=jso['gender'])
         user.save()
-        return redirect('/admin/')
+        return redirect("/admin")
 
 
 @csrf_exempt
@@ -59,7 +59,7 @@ def book_seller_signup(request):
         user = BookSeller.objects.create(django_user=d_user, telephone_no=jso['tel_no'],
                                         address=jso['address'])
         user.save()
-    return redirect('/admin/')
+        return redirect("/admin")
 
 
 # this method verify a book maker user
