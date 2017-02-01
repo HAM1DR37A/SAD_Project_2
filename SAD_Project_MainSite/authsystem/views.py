@@ -112,10 +112,6 @@ def verify_book_seller_user(request):
             print("requested user does not exists!")
 
 
-
-
-
-
 # use this method to show admin, a list of undelivered orders
 @csrf_exempt
 def get_undelivered_orders(request):
@@ -125,10 +121,8 @@ def get_undelivered_orders(request):
             'unverified_orders': unverified_orders,
             'unverified_orders_count': unverified_orders.count(),
         }
-
-        for element in unverified_orders:
-            print(element)
-        return unverified_orders
+        # TODO put desired html here
+        return render_to_response('', output)
 
 
 # use this method to set the delivery date of an order, thus verify that order is delivered
@@ -148,14 +142,17 @@ def deliver_order(request):
         except ObjectDoesNotExist:
             print("requested Order Does not Exists!")
 
+
 # use this method to show admin, a list of unverified bookmaker and bookseller
 @csrf_exempt
 def admin_page(request):
+    unverified_book_makers = BookMaker.objects.filter(is_verified=False)
+    unverified_book_sellers = BookSeller.objects.filter(is_verified=False)
     output = {
-        'unverified_book_makers' : BookMaker.objects.filter(is_verified=False),
-        'unverified_book_makers_count': BookMaker.objects.filter(is_verified=False).count(),
-        'unverified_book_sellers' : BookSeller.objects.filter(is_verified=False),
-        'unverified_book_sellers_count' : BookSeller.objects.filter(is_verified=False).count()
+        'unverified_book_makers' : unverified_book_makers,
+        'unverified_book_makers_count': unverified_book_makers.count(),
+        'unverified_book_sellers' : unverified_book_sellers,
+        'unverified_book_sellers_count' : unverified_book_sellers.count()
     }
 
     print(output['unverified_book_makers'])
