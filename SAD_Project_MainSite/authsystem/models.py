@@ -24,10 +24,6 @@ class OrganizationFinancialAccount(models.Model):
     account_id = models.IntegerField(primary_key=True)
 
 
-class ShoppingCart(models.Model):
-    user_id = models.ForeignKey(BookReaderUser)
-
-
 class Language(models.Model):
     language_name = models.CharField(max_length= 10)
 
@@ -142,11 +138,15 @@ class Write(models.Model):
 class Order(models.Model):
     delivery_date = models.DateTimeField(null=True)
     order_date = models.DateTimeField(default=timezone.now())
-    shopping_cart_id = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE)
+
+
+class BookOrder(models.Model):
+    order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
+    book_id = models.ForeignKey(Book, on_delete=models.PROTECT)
 
 
 class BookShoppingCart(models.Model):
-    shopping_cart_id = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(BookReaderUser, on_delete=models.PROTECT)
     book_id = models.ForeignKey(SellBy, on_delete=models.PROTECT)
 
 

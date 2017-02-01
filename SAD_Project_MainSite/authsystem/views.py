@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils import six, timezone
 from django.http import *
 
+
 # TODO need to check user's authority in all methods
 @csrf_exempt
 def book_reader_signup(request):
@@ -113,6 +114,7 @@ def get_unverified_users(request):
     # verifying bookseller and book maker
     # show list of unverified booksellers and bookmakers to the admin
     # give the option to verify users
+
 
 # use this method to show admin, a list of undelivered orders
 @csrf_exempt

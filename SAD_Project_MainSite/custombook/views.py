@@ -72,5 +72,20 @@ def pre_order_a_book(request):
         if len(user) < 1:
             print("Invalid User!")
         else:
+            user = user[0]
             pre_order = PreOrder.objects.create(user_name=user, book_id=jso['book_id'], quantity=int(jso['quantity']))
             pre_order.save()
+
+
+# this method assign a translator to a translation_request
+# this method should be called by translator, checked in the method
+def translate_a_book(request):
+    if request.method == "POST":
+        post_dict = dict(six.iterlists(request.POST))
+        jso = json.loads(post_dict['command'][0])
+        if request.user.is_authenticated:
+            translator = BookMaker.objects.filter(django_user=request.user)
+        else:
+            print('Anonymous User Error!')
+        if len(user) < 1:
+            print("invalid User!")
