@@ -34,11 +34,23 @@ def book_maker_signup(request):
     if request.method == "POST":
         post_dict = dict(six.iterlists(request.POST))
         jso = json.loads(post_dict['command'][0])
+        if jso['gender'] == 'زن':
+            jso['gender'] = 'FM'
+        else:
+            jso['gender'] = 'ML'
+        if jso['type'] == 'مولف':
+            jso['type'] = 'AUT'
+        else:
+            if jso['type'] == 'مترجم':
+                jso['type'] = 'TR'
+            else:
+                jso['type'] = 'BOTH'
         d_user = User.objects.create(username=jso['username'], password=jso['password'], first_name=jso['first_name'],
                                      last_name=jso['last_name'], email=jso['email'])
-        user = BookMaker.objects.create(django_user=d_user, birth_date=jso['birth_date'],
+        user = BookMaker.objects.create(django_user=d_user, birth_date_day=jso['day'], birth_date_month=jso['month'],
+                                        birth_date_year=jso['year'],
                                         telephone_no=jso['tel_no'],address=jso['address'],
-                                        book_maker_type=jso['book_maker_type'], gender=jso['gender'])
+                                        book_maker_type=jso['type'], gender=jso['gender'])
         user.save()
         return redirect("/admin")
 
@@ -53,7 +65,9 @@ def book_seller_signup(request):
         d_user = User.objects.create(username=jso['username'], password=jso['password'], first_name=jso['first_name'],
                                      last_name=jso['last_name'], email=jso['email'])
         user = BookSeller.objects.create(django_user=d_user, telephone_no=jso['tel_no'],
-                                        address=jso['address'])
+                                         address=jso['address'], birth_date_day=jso['day'],
+                                         birth_date_month=jso['month'],
+                                         birth_date_year=jso['year'])
         user.save()
         return redirect("/admin")
 
@@ -98,19 +112,8 @@ def verify_book_seller_user(request):
             print("requested user does not exists!")
 
 
-# use this method to show admin, a list of unverified bookmaker and bookseller
-@csrf_exempt
-def get_unverified_users(request):
-    if request.method == "GET":
-        unverified_book_makers = BookMaker.objects.filter(is_verified=False)
-        unverified_book_sellers = BookSeller.objects.filter(is_verified=False)
-        unverified_users = chain(unverified_book_sellers, unverified_book_makers)
-        for element in unverified_users:
-            print(element)
-        return unverified_users
-    # verifying bookseller and book maker
-    # show list of unverified booksellers and bookmakers to the admin
-    # give the option to verify users
+
+
 
 
 # use this method to show admin, a list of undelivered orders
@@ -145,7 +148,7 @@ def deliver_order(request):
         except ObjectDoesNotExist:
             print("requested Order Does not Exists!")
 
-
+# use this method to show admin, a list of unverified bookmaker and bookseller
 @csrf_exempt
 def admin_page(request):
     output = {

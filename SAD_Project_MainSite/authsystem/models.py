@@ -14,9 +14,9 @@ class BookReaderUser(models.Model):
     avatar = models.ImageField(null=False, default='user.png')
     telephone_no = models.CharField(max_length=15)
     address = models.CharField(max_length=150, null=True)
-    birth_date_month = models.CharFieldField(max_length=2)
+    birth_date_month = models.CharField(max_length=15)
     birth_date_day = models.CharField(max_length=2)
-    birth_date_day = models.CharField(max_length=4)
+    birth_date_year = models.CharField(max_length=4)
 
     def __str__(self):
         return str(self.id)
@@ -69,9 +69,9 @@ class BookSeller(models.Model):
     telephone_no = models.CharField(max_length=15)
     address = models.CharField(max_length=150, null=False)
     is_verified = models.BooleanField(default=False)
-    birth_date_month = models.CharFieldField(max_length=2)
+    birth_date_month = models.CharField(max_length=15)
     birth_date_day = models.CharField(max_length=2)
-    birth_date_day = models.CharField(max_length=4)
+    birth_date_year = models.CharField(max_length=4)
 
     def __str__(self):
         return str(self.id)
@@ -104,9 +104,9 @@ class BookMaker(models.Model):
         (both, "Both")
     )
     django_user = models.OneToOneField(User, null=False)
-    birth_date_month = models.CharFieldField(max_length=2)
+    birth_date_month = models.CharField(max_length=15)
     birth_date_day = models.CharField(max_length=2)
-    birth_date_day = models.CharField(max_length=4)
+    birth_date_year = models.CharField(max_length=4)
     gender = models.CharField(max_length=2, choices=gender_choices, null=False)
     book_maker_type = models.CharField(max_length=4, choices=type_choices, null=False)
     is_verified = models.BooleanField(default=False)
